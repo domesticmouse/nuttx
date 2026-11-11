@@ -1,0 +1,27 @@
+# am67 (`nuttx/arch/arm/include/am67`)
+
+## Overview
+Hardware abstraction and architecture package for `am67` under `nuttx/arch/arm/include/am67`, providing 1 header file(s) and 0 source file(s) (including `irq.h`).
+
+## Interface
+- `[irq.h:CSLR_R5FSS0_CORE0_INTR_SMS0_AESEIP38T_0_AES_SINTREQUEST_P_0]`
+- `[irq.h:CSLR_R5FSS0_CORE0_INTR_SMS0_AESEIP38T_0_AES_SINTREQUEST_S_0]`
+- `[irq.h:CSLR_R5FSS0_CORE0_INTR_R5FSS0_CORE0_EXP_INTR_0]`
+- `[irq.h:CSLR_R5FSS0_CORE0_INTR_DMPAC0_DMPAC_LEVEL_0]`
+- `[irq.h:CSLR_R5FSS0_CORE0_INTR_DMPAC0_DMPAC_LEVEL_1]`
+- `[irq.h:CSLR_R5FSS0_CORE0_INTR_SA3_SS0_INTAGGR_0_INTAGGR_VINTR_7]`
+- `[irq.h:CSLR_R5FSS0_CORE0_INTR_DMASS1_INTAGGR_0_INTAGGR_VINTR_PEND_32]`
+- `[irq.h:CSLR_R5FSS0_CORE0_INTR_DMASS1_INTAGGR_0_INTAGGR_VINTR_PEND_33]`
+- `[irq.h:CSLR_R5FSS0_CORE0_INTR_DMASS1_INTAGGR_0_INTAGGR_VINTR_PEND_34]`
+- `[irq.h:CSLR_R5FSS0_CORE0_INTR_DMASS1_INTAGGR_0_INTAGGR_VINTR_PEND_35]`
+- `[irq.h:CSLR_R5FSS0_CORE0_INTR_DMASS1_INTAGGR_0_INTAGGR_VINTR_PEND_36]`
+- `[irq.h:CSLR_R5FSS0_CORE0_INTR_DMASS1_INTAGGR_0_INTAGGR_VINTR_PEND_37]`
+
+## Invariants
+- None
+
+## Side Effects
+- None
+
+## Verification
+- Run: `make test`

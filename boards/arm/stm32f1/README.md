@@ -1,0 +1,22 @@
+# `stm32f1` Family Boards (`boards/arm/stm32f1`)
+
+## Overview
+Intermediate blueprint grouping board support packages and shared board drivers for the `stm32f1` SoC/MCU family under the `arm` architecture (16 subdirectories).
+
+## Subdirectories & Boundaries
+- [`cloudctrl`](./cloudctrl/README.md) - Board Support Package (BSP) blueprint for `cloudctrl` (`arm` / `stm32f1`). Coordinates board initialization, headers, and tooling across `include, src, tools`. Includes build configurations: `nsh`.
+- [`et-stm32-stamp`](./et-stm32-stamp/README.md) - Board Support Package (BSP) blueprint for `et-stm32-stamp` (`arm` / `stm32f1`). Coordinates board initialization, headers, and tooling across `include, src`. Includes build configurations: `nsh`.
+- [`fire-stm32v2`](./fire-stm32v2/README.md) - Board Support Package (BSP) blueprint for `fire-stm32v2` (`arm` / `stm32f1`). Coordinates board initialization, headers, and tooling across `include, src`. Includes build configurations: `nsh`.
+- [`hymini-stm32v`](./hymini-stm32v/README.md) - Board Support Package (BSP) blueprint for `hymini-stm32v` (`arm` / `stm32f1`). Coordinates board initialization, headers, and tooling across `include, src`. Includes build configurations: `nsh`, `nsh2`, `usbmsc`, `usbnsh`, `usbserial`.
+- [`maple`](./maple/README.md) - Board Support Package (BSP) blueprint for `maple` (`arm` / `stm32f1`). Coordinates board initialization, headers, and tooling across `include, src, tools`. Includes build configurations: `nsh`, `nx`, `usbnsh`.
+- [`nucleo-f103rb`](./nucleo-f103rb/README.md) - Board Support Package (BSP) blueprint for `nucleo-f103rb` (`arm` / `stm32f1`). Coordinates board initialization, headers, and tooling across `include, src`. Includes build configurations: `adc`, `ihm07m1_b16`, `nsh`, `pwm`, `qenco`.
+- [`nvmpg-stm32f1`](./nvmpg-stm32f1/README.md) - Board Support Package (BSP) blueprint for `nvmpg-stm32f1` (`arm` / `stm32f1`). Coordinates board initialization, headers, and tooling across `include, src`. Includes build configurations: `dro`.
+- [`olimex-stm32-p107`](./olimex-stm32-p107/README.md) - Board Support Package (BSP) blueprint for `olimex-stm32-p107` (`arm` / `stm32f1`). Coordinates board initialization, headers, and tooling across `include, src`. Includes build configurations: `nsh`.
+- [`olimexino-stm32`](./olimexino-stm32/README.md) - Board Support Package (BSP) blueprint for `olimexino-stm32` (`arm` / `stm32f1`). Coordinates board initialization, headers, and tooling across `include, src`. Includes build configurations: `can`, `composite`, `nsh`, `smallnsh`, `tiny`.
+- [`shenzhou`](./shenzhou/README.md) - Board Support Package (BSP) blueprint for `shenzhou` (`arm` / `stm32f1`). Coordinates board initialization, headers, and tooling across `include, src, tools`. Includes build configurations: `nsh`, `nxwm`, `thttpd`.
+- [`stm3210e-eval`](./stm3210e-eval/README.md) - Board Support Package (BSP) blueprint for `stm3210e-eval` (`arm` / `stm32f1`). Coordinates board initialization, headers, and tooling across `include, src, tools`. Includes build configurations: `composite`, `nsh`, `nsh2`, `nx`, `nxterm`, `pm` (+2 more).
+- [`stm32_tiny`](./stm32_tiny/README.md) - Board Support Package (BSP) blueprint for `stm32_tiny` (`arm` / `stm32f1`). Coordinates board initialization, headers, and tooling across `include, src`. Includes build configurations: `nsh`, `usbnsh`.
+- [`stm32butterfly2`](./stm32butterfly2/README.md) - Board Support Package (BSP) blueprint for `stm32butterfly2` (`arm` / `stm32f1`). Coordinates board initialization, headers, and tooling across `include, src`. Includes build configurations: `nsh`, `nshnet`, `nshusbdev`, `nshusbhost`.
+- [`stm32f103-minimum`](./stm32f103-minimum/README.md) - Board Support Package (BSP) blueprint for `stm32f103-minimum` (`arm` / `stm32f1`). Coordinates board initialization, headers, and tooling across `include, src`. Includes build configurations: `adb`, `apds9960`, `audio_tone`, `buttons`, `can`, `hello` (+14 more).
+- [`stm32vldiscovery`](./stm32vldiscovery/README.md) - Board Support Package (BSP) blueprint for `stm32vldiscovery` (`arm` / `stm32f1`). Coordinates board initialization, headers, and tooling across `include, src`. Includes build configurations: `nsh`.
+- [`viewtool-stm32f107`](./viewtool-stm32f107/README.md) - Board Support Package (BSP) blueprint for `viewtool-stm32f107` (`arm` / `stm32f1`). Coordinates board initialization, headers, and tooling across `include, src`. Includes build configurations: `ft80x`, `highpri`, `netnsh`, `nsh`, `tcpblaster`.

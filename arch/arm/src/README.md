@@ -1,0 +1,220 @@
+# src (`nuttx/arch/arm/src`)
+
+## Overview
+Architectural grouping for `nuttx/arch/arm/src`, coordinating 94 component subdirectories (`a1x`, `am335x`, `am67`, `arm`, `armv6-m`, `armv7-a`, `armv7-m`, `armv7-r`, and 86 more).
+
+## Subdirectories & Boundaries
+- `a1x`: [./a1x/README.md](./a1x/README.md) - Hardware abstraction and architecture package for `a1x` (A1x Configuration Options; Allwinner A1X Peripheral Support) under `nuttx/arch/arm/src/a1x`, providing 7 header file(s) and 6 source file(s) (including `a1x_boot.h`, `a1x_config.h`, `a1x_irq.h`, `a1x_lowputc.h`).
+- `am335x`: [./am335x/README.md](./am335x/README.md) - Hardware abstraction and architecture package for `am335x` (AM335x Configuration Options; TI AM335X Peripheral Support) under `nuttx/arch/arm/src/am335x`, providing 14 header file(s) and 16 source file(s) (including `am335x_boot.h`, `am335x_can.h`, `am335x_clockconfig.h`, `am335x_config.h`).
+- `am67`: [./am67/README.md](./am67/README.md) - Hardware abstraction and architecture package for `am67` (AM67 Configuration Options) under `nuttx/arch/arm/src/am67`, providing 13 header file(s) and 13 source file(s) (including `am67_ecap.h`, `am67_ecap_hw.h`, `am67_gpio.h`, `am67_i2c.h`).
+- `arm`: [./arm/README.md](./arm/README.md) - Hardware abstraction and architecture package for `arm` (ARM Configuration Options) under `nuttx/arch/arm/src/arm`, providing 2 header file(s) and 13 source file(s) (including `arm.h`, `pg_macros.h`, `arm_allocpage.c`, `arm_checkmapping.c`).
+- `armv6-m`: [./armv6-m/README.md](./armv6-m/README.md) - Hardware abstraction and architecture package for `armv6-m` (ARMv6-M Configuration Options) under `nuttx/arch/arm/src/armv6-m`, providing 4 header file(s) and 14 source file(s) (including `exc_return.h`, `nvic.h`, `psr.h`, `ram_vectors.h`).
+- `armv7-a`: [./armv7-a/README.md](./armv7-a/README.md) - Hardware abstraction and architecture package for `armv7-a` (ARMv7-A Configuration Options; L2 Cache Configuration) under `nuttx/arch/arm/src/armv7-a`, providing 15 header file(s) and 42 source file(s) (including `addrenv.h`, `arm.h`, `arm_cpu_psci.h`, `arm_timer.h`).
+- `armv7-m`: [./armv7-m/README.md](./armv7-m/README.md) - Hardware abstraction and architecture package for `armv7-m` (ARMv7-M Configuration Options) under `nuttx/arch/arm/src/armv7-m`, providing 12 header file(s) and 27 source file(s) (including `dwt.h`, `etm.h`, `exc_return.h`, `fpb.h`).
+- `armv7-r`: [./armv7-r/README.md](./armv7-r/README.md) - Hardware abstraction and architecture package for `armv7-r` (ARMv7-R Configuration Options; L2 Cache Configuration) under `nuttx/arch/arm/src/armv7-r`, providing 11 header file(s) and 23 source file(s) (including `arm.h`, `arm_timer.h`, `cp15_cacheops.h`, `gic.h`).
+- `armv8-m`: [./armv8-m/README.md](./armv8-m/README.md) - Hardware abstraction and architecture package for `armv8-m` (ARMv8-M Configuration Options) under `nuttx/arch/arm/src/armv8-m`, providing 14 header file(s) and 32 source file(s) (including `dwt.h`, `etm.h`, `exc_return.h`, `fpb.h`).
+- `armv8-r`: [./armv8-r/README.md](./armv8-r/README.md) - Hardware abstraction and architecture package for `armv8-r` (ARMv8-R Configuration Options; L2 Cache Configuration) under `nuttx/arch/arm/src/armv8-r`, providing 7 header file(s) and 18 source file(s) (including `arm.h`, `arm_gic.h`, `arm_timer.h`, `cp15_cacheops.h`).
+- `at32`: [./at32/README.md](./at32/README.md) - Hardware abstraction and architecture package for `at32` (AT32 Configuration Options; AT32 Peripheral Support) under `nuttx/arch/arm/src/at32`, providing 33 header file(s) and 49 source file(s) (including `at32.h`, `at32_adc.h`, `at32_can.h`, `at32_dbgmcu.h`).
+- `c5471`: [./c5471/README.md](./c5471/README.md) - Hardware abstraction and architecture package for `c5471` (C5471 Configuration Options; IrDA UART Configuration) under `nuttx/arch/arm/src/c5471`, providing 1 header file(s) and 5 source file(s) (including `chip.h`, `c5471_ethernet.c`, `c5471_irq.c`, `c5471_serial.c`).
+- `common`: [./common/README.md](./common/README.md) - Hardware abstraction and architecture package for `common` under `nuttx/arch/arm/src/common`, providing 3 header file(s) and 27 source file(s) (including `arm_fork.h`, `arm_internal.h`, `hwcap.h`, `arm_allocateheap.c`).
+- `csk6`: [./csk6/README.md](./csk6/README.md) - Hardware abstraction and architecture package for `csk6` under `nuttx/arch/arm/src/csk6`, providing 2 header file(s) and 5 source file(s) (including `chip.h`, `csk6_lowputc.h`, `csk6_irq.c`, `csk6_lowputc.c`).
+- `cxd32xx`: [./cxd32xx/README.md](./cxd32xx/README.md) - Hardware abstraction and architecture package for `cxd32xx` (Peripheral Support) under `nuttx/arch/arm/src/cxd32xx`, providing 4 header file(s) and 6 source file(s) (including `chip.h`, `cxd32_config.h`, `cxd32_serial.h`, `cxd32_uart.h`).
+- `cxd56xx`: [./cxd56xx/README.md](./cxd56xx/README.md) - Hardware abstraction and architecture package for `cxd56xx` (CXD56xx Options; CXD56xx Package Configuration) under `nuttx/arch/arm/src/cxd56xx`, providing 44 header file(s) and 58 source file(s) (including `chip.h`, `cxd56_adc.h`, `cxd56_charger.h`, `cxd56_clock.h`).
+- `dm320`: [./dm320/README.md](./dm320/README.md) - Hardware abstraction and architecture package for `dm320` (DM320 Configuration Options; DM320 Peripheral Selections) under `nuttx/arch/arm/src/dm320`, providing 12 header file(s) and 8 source file(s) (including `chip.h`, `dm320_ahb.h`, `dm320_busc.h`, `dm320_clkc.h`).
+- `efm32`: [./efm32/README.md](./efm32/README.md) - Hardware abstraction and architecture package for `efm32` (EFM32 Configuration Options; EFM32 Peripheral Support) under `nuttx/arch/arm/src/efm32`, providing 17 header file(s) and 22 source file(s) (including `chip.h`, `efm32_adc.h`, `efm32_bitband.h`, `efm32_clockconfig.h`).
+- `eoss3`: [./eoss3/README.md](./eoss3/README.md) - Hardware abstraction and architecture package for `eoss3` (EOS S3 Configuration Options; EOS S3 Peripheral Support) under `nuttx/arch/arm/src/eoss3`, providing 6 header file(s) and 8 source file(s) (including `chip.h`, `eoss3.h`, `eoss3_clockconfig.h`, `eoss3_gpio.h`).
+- `fvp-v8r-aarch32`: [./fvp-v8r-aarch32/README.md](./fvp-v8r-aarch32/README.md) - Hardware abstraction and architecture package for `fvp-v8r-aarch32` (FVP ARMv8-R Virt Chip Selection) under `nuttx/arch/arm/src/fvp-v8r-aarch32`, providing 2 header file(s) and 2 source file(s) (including `chip.h`, `fvp_boot.h`, `fvp_boot.c`, `fvp_serial.c`).
+- `gd32f4`: [./gd32f4/README.md](./gd32f4/README.md) - Hardware abstraction and architecture package for `gd32f4` (GD32F4 Configuration Options; GD32 Peripheral Support) under `nuttx/arch/arm/src/gd32f4`, providing 17 header file(s) and 19 source file(s) (including `chip.h`, `gd32f4xx.h`, `gd32f4xx_dma.h`, `gd32f4xx_enet.h`).
+- `gd32w51x`: [./gd32w51x/README.md](./gd32w51x/README.md) - Hardware abstraction and architecture package for `gd32w51x` (GD32W51x Configuration Options; GD32W51x Peripheral Support) under `nuttx/arch/arm/src/gd32w51x`, providing 21 header file(s) and 25 source file(s) (including `chip.h`, `gd32w51x.h`, `gd32w51x_adc.h`, `gd32w51x_capture.h`).
+- `goldfish`: [./goldfish/README.md](./goldfish/README.md) - Hardware abstraction and architecture package for `goldfish` (Goldfish Virt Chip Selection) under `nuttx/arch/arm/src/goldfish`, providing 3 header file(s) and 7 source file(s) (including `chip.h`, `goldfish_irq.h`, `goldfish_memorymap.h`, `goldfish_boot.c`).
+- `ht32f491x3`: [./ht32f491x3/README.md](./ht32f491x3/README.md) - Hardware abstraction and architecture package for `ht32f491x3` (HT32F491x3 Configuration Options; Peripheral Support) under `nuttx/arch/arm/src/ht32f491x3`, providing 7 header file(s) and 8 source file(s) (including `chip.h`, `ht32f491x3_config.h`, `ht32f491x3_gpio.h`, `ht32f491x3_lowputc.h`).
+- `imx1`: [./imx1/README.md](./imx1/README.md) - Hardware abstraction and architecture package for `imx1` (iMX.1 Peripheral Selection) under `nuttx/arch/arm/src/imx1`, providing 14 header file(s) and 8 source file(s) (including `chip.h`, `imx_aitc.h`, `imx_cspi.h`, `imx_dma.h`).
+- `imx6`: [./imx6/README.md](./imx6/README.md) - Hardware abstraction and architecture package for `imx6` (iMX.6 Chip Selection; iMX.6 Peripheral Selection) under `nuttx/arch/arm/src/imx6`, providing 11 header file(s) and 14 source file(s) (including `chip.h`, `imx_boot.h`, `imx_clockconfig.h`, `imx_config.h`).
+- `imx9`: [./imx9/README.md](./imx9/README.md) - Hardware abstraction and architecture package for `imx9` (i.MX9 Peripheral Selection; FLEXCAN Peripherals) under `nuttx/arch/arm/src/imx9`, providing 21 header file(s) and 27 source file(s) (including `chip.h`, `imx9_ccm.h`, `imx9_clockconfig.h`, `imx9_edma.h`).
+- `imxrt`: [./imxrt/README.md](./imxrt/README.md) - Hardware abstraction and architecture package for `imxrt` (i.MX RT Configuration Options; Application Image Configuration) under `nuttx/arch/arm/src/imxrt`, providing 44 header file(s) and 62 source file(s) (including `chip.h`, `imxrt118x_ele.h`, `imxrt118x_start_cm7.h`, `imxrt118x_trdc.h`).
+- `kinetis`: [./kinetis/README.md](./kinetis/README.md) - Hardware abstraction and architecture package for `kinetis` (Kinetis Configuration Options; Kinetis Peripheral Support) under `nuttx/arch/arm/src/kinetis`, providing 18 header file(s) and 34 source file(s) (including `chip.h`, `kinetis.h`, `kinetis_alarm.h`, `kinetis_config.h`).
+- `kl`: [./kl/README.md](./kl/README.md) - Hardware abstraction and architecture package for `kl` (Kinetis Configuration Options; Kinetis Peripheral Support) under `nuttx/arch/arm/src/kl`, providing 11 header file(s) and 15 source file(s) (including `chip.h`, `kl_clockconfig.h`, `kl_config.h`, `kl_dma.h`).
+- `lc823450`: [./lc823450/README.md](./lc823450/README.md) - Hardware abstraction and architecture package for `lc823450` (LC823450 Configuration Options; LC823450 Peripheral Support) under `nuttx/arch/arm/src/lc823450`, providing 26 header file(s) and 34 source file(s) (including `chip.h`, `lc823450_adc.h`, `lc823450_clockconfig.h`, `lc823450_dma.h`).
+- `lpc17xx_40xx`: [./lpc17xx_40xx/README.md](./lpc17xx_40xx/README.md) - Hardware abstraction and architecture package for `lpc17xx_40xx` (LPC17xx/40xx Configuration Options; LPC17xx/LPC40xx Peripheral Support) under `nuttx/arch/arm/src/lpc17xx_40xx`, providing 33 header file(s) and 37 source file(s) (including `chip.h`, `lpc176x_gpio.h`, `lpc178x_40xx_gpio.h`, `lpc17_40_adc.h`).
+- `lpc214x`: [./lpc214x/README.md](./lpc214x/README.md) - Hardware abstraction and architecture package for `lpc214x` (LPC214x Configuration Options; LPC214x Initialization Options) under `nuttx/arch/arm/src/lpc214x`, providing 11 header file(s) and 5 source file(s) (including `chip.h`, `lpc214x_apb.h`, `lpc214x_i2c.h`, `lpc214x_pinsel.h`).
+- `lpc2378`: [./lpc2378/README.md](./lpc2378/README.md) - Hardware abstraction and architecture package for `lpc2378` (LPC2378 Configuration Options; LPC2378 Peripheral Support) under `nuttx/arch/arm/src/lpc2378`, providing 10 header file(s) and 8 source file(s) (including `chip.h`, `lpc2378.h`, `lpc23xx_gpio.h`, `lpc23xx_i2c.h`).
+- `lpc31xx`: [./lpc31xx/README.md](./lpc31xx/README.md) - Hardware abstraction and architecture package for `lpc31xx` (LPC31xx Configuration Options; LPC31xx Peripheral Support) under `nuttx/arch/arm/src/lpc31xx`, providing 28 header file(s) and 26 source file(s) (including `chip.h`, `lpc31.h`, `lpc31_adc.h`, `lpc31_analogdie.h`).
+- `lpc43xx`: [./lpc43xx/README.md](./lpc43xx/README.md) - Hardware abstraction and architecture package for `lpc43xx` (LPC43xx Configuration Options; LPC43xx Peripheral Support) under `nuttx/arch/arm/src/lpc43xx`, providing 35 header file(s) and 36 source file(s) (including `chip.h`, `lpc43_adc.h`, `lpc43_can.h`, `lpc43_ccu.h`).
+- `lpc54xx`: [./lpc54xx/README.md](./lpc54xx/README.md) - Hardware abstraction and architecture package for `lpc54xx` (LPC54xx Configuration Options; LPC54xx Peripheral Selection) under `nuttx/arch/arm/src/lpc54xx`, providing 25 header file(s) and 27 source file(s) (including `chip.h`, `lpc546x_enableclk.h`, `lpc546x_power.h`, `lpc546x_reset.h`).
+- `max326xx`: [./max326xx/README.md](./max326xx/README.md) - Hardware abstraction and architecture package for `max326xx` (Maxim Integrate MAX326xx Configuration Options; MAX32xx Peripheral Selection) under `nuttx/arch/arm/src/max326xx`, providing 16 header file(s) and 0 source file(s) (including `chip.h`, `max326_clockconfig.h`, `max326_config.h`, `max326_dma.h`).
+- `mcx-nxxx`: [./mcx-nxxx/README.md](./mcx-nxxx/README.md) - Hardware abstraction and architecture package for `mcx-nxxx` (MCX NXXx Chip Selection; NXXX Peripheral Selection) under `nuttx/arch/arm/src/mcx-nxxx`, providing 7 header file(s) and 12 source file(s) (including `chip.h`, `nxxx_clockconfig.h`, `nxxx_gpio.h`, `nxxx_lowputc.h`).
+- `moxart`: [./moxart/README.md](./moxart/README.md) - Hardware abstraction and architecture package for `moxart` (MoxART Configuration Options) under `nuttx/arch/arm/src/moxart`, providing 1 header file(s) and 5 source file(s) (including `chip.h`, `moxart_16550.c`, `moxart_idle.c`, `moxart_irq.c`).
+- `mps`: [./mps/README.md](./mps/README.md) - Hardware abstraction and architecture package for `mps` (MPS Chip Selection) under `nuttx/arch/arm/src/mps`, providing 3 header file(s) and 6 source file(s) (including `chip.h`, `mps_irq.h`, `mps_userspace.h`, `mps_allocateheap.c`).
+- `mx8mp`: [./mx8mp/README.md](./mx8mp/README.md) - Hardware abstraction and architecture package for `mx8mp` (i.MX8MP Configuration Options; i.MX8MP Peripheral Selection) under `nuttx/arch/arm/src/mx8mp`, providing 16 header file(s) and 18 source file(s) (including `chip.h`, `mx8mp_ccm.h`, `mx8mp_clockconfig.h`, `mx8mp_config.h`).
+- `n32h7`: [./n32h7/README.md](./n32h7/README.md) - Hardware abstraction and architecture package for `n32h7` (Timer Configuration; N32H7 TIMx Outputs Configuration) under `nuttx/arch/arm/src/n32h7`, providing 22 header file(s) and 33 source file(s) (including `chip.h`, `n32_capture.h`, `n32_cordic.h`, `n32_dbgmcu.h`).
+- `nrf52`: [./nrf52/README.md](./nrf52/README.md) - Hardware abstraction and architecture package for `nrf52` (nRF52 Configuration Options; nRF52 Peripheral Selection) under `nuttx/arch/arm/src/nrf52`, providing 33 header file(s) and 39 source file(s) (including `chip.h`, `nrf52_adc.h`, `nrf52_clockconfig.h`, `nrf52_config.h`).
+- `nrf53`: [./nrf53/README.md](./nrf53/README.md) - Hardware abstraction and architecture package for `nrf53` (nRF53 Configuration Options; nRF53 Peripheral Selection) under `nuttx/arch/arm/src/nrf53`, providing 33 header file(s) and 37 source file(s) (including `chip.h`, `nrf53_adc.h`, `nrf53_clockconfig.h`, `nrf53_config.h`).
+- `nrf54l`: [./nrf54l/README.md](./nrf54l/README.md) - Hardware abstraction and architecture package for `nrf54l` (nRF54L Configuration Options; nRF54L Peripheral Selection) under `nuttx/arch/arm/src/nrf54l`, providing 27 header file(s) and 32 source file(s) (including `chip.h`, `nrf54l_adc.h`, `nrf54l_clockconfig.h`, `nrf54l_config.h`).
+- `nrf91`: [./nrf91/README.md](./nrf91/README.md) - Hardware abstraction and architecture package for `nrf91` (nRF91 Configuration Options; nRF91 Peripheral Selection) under `nuttx/arch/arm/src/nrf91`, providing 22 header file(s) and 28 source file(s) (including `chip.h`, `nrf91_clockconfig.h`, `nrf91_config.h`, `nrf91_errata.h`).
+- `nuc1xx`: [./nuc1xx/README.md](./nuc1xx/README.md) - Hardware abstraction and architecture package for `nuc1xx` (NUC100/120 Configuration Options; NUC1XX Peripheral Support) under `nuttx/arch/arm/src/nuc1xx`, providing 9 header file(s) and 10 source file(s) (including `chip.h`, `nuc_clockconfig.h`, `nuc_config.h`, `nuc_gpio.h`).
+- `phy62xx`: [./phy62xx/README.md](./phy62xx/README.md) - Hardware abstraction and architecture package for `phy62xx` (PHY62xx Configuration Options) under `nuttx/arch/arm/src/phy62xx`, providing 27 header file(s) and 22 source file(s) (including `bus_dev.h`, `chip.h`, `clock.h`, `core_bumbee_m0.h`).
+- `qemu`: [./qemu/README.md](./qemu/README.md) - Hardware abstraction and architecture package for `qemu` (Qemu Virt Chip Selection) under `nuttx/arch/arm/src/qemu`, providing 4 header file(s) and 10 source file(s) (including `chip.h`, `qemu_irq.h`, `qemu_memorymap.h`, `qemu_userspace.h`).
+- `ra4`: [./ra4/README.md](./ra4/README.md) - Hardware abstraction and architecture package for `ra4` (RA Configuration Options; RA4M1 Peripheral Support) under `nuttx/arch/arm/src/ra4`, providing 7 header file(s) and 10 source file(s) (including `chip.h`, `ra_clockconfig.h`, `ra_gpio.h`, `ra_icu.h`).
+- `ra8m1`: [./ra8m1/README.md](./ra8m1/README.md) - Hardware abstraction and architecture package for `ra8m1` (RA Configuration Options; RA8M1 Peripheral Support) under `nuttx/arch/arm/src/ra8m1`, providing 10 header file(s) and 14 source file(s) (including `chip.h`, `ra_clockconfig.h`, `ra_dtc.h`, `ra_gpio.h`).
+- `rm57`: [./rm57/README.md](./rm57/README.md) - Hardware abstraction and architecture package for `rm57` (RM57 Configuration Options; RM57 Peripheral Support) under `nuttx/arch/arm/src/rm57`, providing 18 header file(s) and 25 source file(s) (including `chip.h`, `rm57_adc.h`, `rm57_boot.h`, `rm57_clockconfig.h`).
+- `rp2040`: [./rp2040/README.md](./rp2040/README.md) - Hardware abstraction and architecture package for `rp2040` (RP2040 Configuration Options) under `nuttx/arch/arm/src/rp2040`, providing 23 header file(s) and 30 source file(s) (including `chip.h`, `rp2040_adc.h`, `rp2040_clock.h`, `rp2040_config.h`).
+- `rp23xx`: [./rp23xx/README.md](./rp23xx/README.md) - Hardware abstraction and architecture package for `rp23xx` (RP23XX Configuration Options) under `nuttx/arch/arm/src/rp23xx`, providing 30 header file(s) and 40 source file(s) (including `chip.h`, `rp23xx_adc.h`, `rp23xx_clock.h`, `rp23xx_config.h`).
+- `rtl8720c`: [./rtl8720c/README.md](./rtl8720c/README.md) - Hardware abstraction and architecture package for `rtl8720c` (AMEBA Configuration Options) under `nuttx/arch/arm/src/rtl8720c`, providing 10 header file(s) and 18 source file(s) (including `ameba_efuse.h`, `ameba_flash.h`, `ameba_uart.h`, `amebaz_coex.h`).
+- `rtl8720f`: [./rtl8720f/README.md](./rtl8720f/README.md) - Hardware abstraction and architecture package for `rtl8720f` (RTL8720F Chip Selection; RTL8720F Bring-up Options) under `nuttx/arch/arm/src/rtl8720f`, providing 12 header file(s) and 8 source file(s) (including `ameba_adc_chip.h`, `ameba_gpio_chip.h`, `ameba_i2c_chip.h`, `ameba_ipc.h`).
+- `rtl8721dx`: [./rtl8721dx/README.md](./rtl8721dx/README.md) - Hardware abstraction and architecture package for `rtl8721dx` (RTL8721Dx Chip Selection; RTL8721Dx Bring-up Options) under `nuttx/arch/arm/src/rtl8721dx`, providing 11 header file(s) and 7 source file(s) (including `ameba_adc_chip.h`, `ameba_gpio_chip.h`, `ameba_i2c_chip.h`, `ameba_irq.h`).
+- `rtl8721f`: [./rtl8721f/README.md](./rtl8721f/README.md) - Hardware abstraction and architecture package for `rtl8721f` (RTL8721F Chip Selection; RTL8721F Bring-up Options) under `nuttx/arch/arm/src/rtl8721f`, providing 12 header file(s) and 8 source file(s) (including `ameba_adc_chip.h`, `ameba_gpio_chip.h`, `ameba_i2c_chip.h`, `ameba_ipc.h`).
+- `rtl8730e`: [./rtl8730e/README.md](./rtl8730e/README.md) - Hardware abstraction and architecture package for `rtl8730e` (Realtek AmebaSmart (RTL8730E) Chip Selection) under `nuttx/arch/arm/src/rtl8730e`, providing 13 header file(s) and 13 source file(s) (including `ameba_adc_chip.h`, `ameba_gpio_chip.h`, `ameba_i2c_chip.h`, `ameba_pwm_chip.h`).
+- `s32k1xx`: [./s32k1xx/README.md](./s32k1xx/README.md) - Hardware abstraction and architecture package for `s32k1xx` (S32K1XX Peripheral Selection; S32K1xx Reset Control Module (RCM)) under `nuttx/arch/arm/src/s32k1xx`, providing 22 header file(s) and 26 source file(s) (including `chip.h`, `s32k1xx_clockconfig.h`, `s32k1xx_config.h`, `s32k1xx_edma.h`).
+- `s32k3xx`: [./s32k3xx/README.md](./s32k3xx/README.md) - Hardware abstraction and architecture package for `s32k3xx` (S32K3XX Heap Configuration; S32K3XX Peripheral Selection) under `nuttx/arch/arm/src/s32k3xx`, providing 21 header file(s) and 25 source file(s) (including `chip.h`, `s32k3xx_clockconfig.h`, `s32k3xx_clocknames.h`, `s32k3xx_config.h`).
+- `sam34`: [./sam34/README.md](./sam34/README.md) - Hardware abstraction and architecture package for `sam34` (AT91SAM3/4 Configuration Options; AT91SAM3/4 Peripheral Support) under `nuttx/arch/arm/src/sam34`, providing 37 header file(s) and 40 source file(s) (including `chip.h`, `sam3u_gpio.h`, `sam3u_periphclks.h`, `sam3x_gpio.h`).
+- `sama5`: [./sama5/README.md](./sama5/README.md) - Hardware abstraction and architecture package for `sama5` (SAMA5 Configuration Options; SAMA5 Peripheral Support) under `nuttx/arch/arm/src/sama5`, providing 49 header file(s) and 63 source file(s) (including `chip.h`, `sam_adc.h`, `sam_boot.h`, `sam_can.h`).
+- `samd2l2`: [./samd2l2/README.md](./samd2l2/README.md) - Hardware abstraction and architecture package for `samd2l2` (Atmel SAMD/L Configuration Options; SAMD/L Peripheral Support) under `nuttx/arch/arm/src/samd2l2`, providing 28 header file(s) and 22 source file(s) (including `chip.h`, `sam_ac.h`, `sam_adc.h`, `sam_clockconfig.h`).
+- `samd5e5`: [./samd5e5/README.md](./samd5e5/README.md) - Hardware abstraction and architecture package for `samd5e5` (Microchip SAMD5x/E5x Configuration Options; SAMD5x/E5x Peripheral Support) under `nuttx/arch/arm/src/samd5e5`, providing 26 header file(s) and 29 source file(s) (including `chip.h`, `sam_clockconfig.h`, `sam_cmcc.h`, `sam_config.h`).
+- `samv7`: [./samv7/README.md](./samv7/README.md) - Hardware abstraction and architecture package for `samv7` (SAMV7 Configuration Options; SAMV7 Peripheral Selection) under `nuttx/arch/arm/src/samv7`, providing 41 header file(s) and 47 source file(s) (including `chip.h`, `sam_1wire.h`, `sam_afec.h`, `sam_chipid.h`).
+- `stm32c0`: [./stm32c0/README.md](./stm32c0/README.md) - Hardware abstraction and architecture package for `stm32c0` (STM32 C0 configuration) under `nuttx/arch/arm/src/stm32c0`, providing 2 header file(s) and 2 source file(s) (including `chip.h`, `stm32.h`, `stm32_rcc.c`, `stm32c0_rcc.c`).
+- `stm32c5`: [./stm32c5/README.md](./stm32c5/README.md) - Hardware abstraction and architecture package for `stm32c5` (STM32C5 Configuration Options) under `nuttx/arch/arm/src/stm32c5`, providing 3 header file(s) and 2 source file(s) (including `chip.h`, `stm32.h`, `stm32_rcc_m33.h`, `stm32_rcc.c`).
+- `stm32f0`: [./stm32f0/README.md](./stm32f0/README.md) - Hardware abstraction and architecture package for `stm32f0` (STM32 F0 configuration) under `nuttx/arch/arm/src/stm32f0`, providing 2 header file(s) and 2 source file(s) (including `chip.h`, `stm32.h`, `stm32_rcc.c`, `stm32f0_rcc.c`).
+- `stm32f1`: [./stm32f1/README.md](./stm32f1/README.md) - Hardware abstraction and architecture package for `stm32f1` (STM32 F1 configuration; Alternate Pin Mapping) under `nuttx/arch/arm/src/stm32f1`, providing 2 header file(s) and 2 source file(s) (including `chip.h`, `stm32.h`, `stm32_rcc.c`, `stm32f10xxx_rcc.c`).
+- `stm32f2`: [./stm32f2/README.md](./stm32f2/README.md) - Hardware abstraction and architecture package for `stm32f2` (STM32 F2 configuration) under `nuttx/arch/arm/src/stm32f2`, providing 2 header file(s) and 2 source file(s) (including `chip.h`, `stm32.h`, `stm32_rcc.c`, `stm32f20xxx_rcc.c`).
+- `stm32f3`: [./stm32f3/README.md](./stm32f3/README.md) - Hardware abstraction and architecture package for `stm32f3` (STM32 F3 configuration) under `nuttx/arch/arm/src/stm32f3`, providing 2 header file(s) and 4 source file(s) (including `chip.h`, `stm32.h`, `stm32_rcc.c`, `stm32f30xxx_rcc.c`).
+- `stm32f4`: [./stm32f4/README.md](./stm32f4/README.md) - Hardware abstraction and architecture package for `stm32f4` (STM32 F4 configuration) under `nuttx/arch/arm/src/stm32f4`, providing 2 header file(s) and 2 source file(s) (including `chip.h`, `stm32.h`, `stm32_rcc.c`, `stm32f40xxx_rcc.c`).
+- `stm32f7`: [./stm32f7/README.md](./stm32f7/README.md) - Hardware abstraction and architecture package for `stm32f7` (STM32 F7 Configuration Options) under `nuttx/arch/arm/src/stm32f7`, providing 35 header file(s) and 49 source file(s) (including `chip.h`, `stm32.h`, `stm32_adc.h`, `stm32_alarm.h`).
+- `stm32g0`: [./stm32g0/README.md](./stm32g0/README.md) - Hardware abstraction and architecture package for `stm32g0` (STM32 G0 configuration) under `nuttx/arch/arm/src/stm32g0`, providing 2 header file(s) and 2 source file(s) (including `chip.h`, `stm32.h`, `stm32_rcc.c`, `stm32g0_rcc.c`).
+- `stm32g4`: [./stm32g4/README.md](./stm32g4/README.md) - Hardware abstraction and architecture package for `stm32g4` (STM32 G4 configuration) under `nuttx/arch/arm/src/stm32g4`, providing 2 header file(s) and 2 source file(s) (including `chip.h`, `stm32.h`, `stm32_rcc.c`, `stm32g4xxxx_rcc.c`).
+- `stm32h5`: [./stm32h5/README.md](./stm32h5/README.md) - Hardware abstraction and architecture package for `stm32h5` (STM32H5 Configuration Options; STM32H5 OTP Options) under `nuttx/arch/arm/src/stm32h5`, providing 24 header file(s) and 28 source file(s) (including `chip.h`, `stm32.h`, `stm32_adc.h`, `stm32_capture.h`).
+- `stm32h7`: [./stm32h7/README.md](./stm32h7/README.md) - Hardware abstraction and architecture package for `stm32h7` (STM32 H7 Configuration Options; Application Image Configuration) under `nuttx/arch/arm/src/stm32h7`, providing 40 header file(s) and 55 source file(s) (including `chip.h`, `stm32.h`, `stm32_adc.h`, `stm32_aes.h`).
+- `stm32l0`: [./stm32l0/README.md](./stm32l0/README.md) - Hardware abstraction and architecture package for `stm32l0` (STM32 L0 configuration) under `nuttx/arch/arm/src/stm32l0`, providing 2 header file(s) and 2 source file(s) (including `chip.h`, `stm32.h`, `stm32_rcc.c`, `stm32l0_rcc.c`).
+- `stm32l1`: [./stm32l1/README.md](./stm32l1/README.md) - Hardware abstraction and architecture package for `stm32l1` (STM32 L1 configuration) under `nuttx/arch/arm/src/stm32l1`, providing 2 header file(s) and 2 source file(s) (including `chip.h`, `stm32.h`, `stm32_rcc.c`, `stm32l15xxx_rcc.c`).
+- `stm32l4`: [./stm32l4/README.md](./stm32l4/README.md) - Hardware abstraction and architecture package for `stm32l4` (STM32L4 Configuration Options; STM32L4 SRAM2 and SRAM3 Options) under `nuttx/arch/arm/src/stm32l4`, providing 33 header file(s) and 52 source file(s) (including `chip.h`, `stm32.h`, `stm32l4_adc.h`, `stm32l4_can.h`).
+- `stm32l5`: [./stm32l5/README.md](./stm32l5/README.md) - Hardware abstraction and architecture package for `stm32l5` (STM32L5 Configuration Options) under `nuttx/arch/arm/src/stm32l5`, providing 8 header file(s) and 9 source file(s) (including `chip.h`, `stm32.h`, `stm32_rcc_m33.h`, `stm32l5_flash.h`).
+- `stm32n6`: [./stm32n6/README.md](./stm32n6/README.md) - Hardware abstraction and architecture package for `stm32n6` (STM32N6 Configuration Options) under `nuttx/arch/arm/src/stm32n6`, providing 5 header file(s) and 6 source file(s) (including `chip.h`, `stm32.h`, `stm32_pwr.h`, `stm32_rcc.h`).
+- `stm32u0`: [./stm32u0/README.md](./stm32u0/README.md) - Hardware abstraction and architecture package for `stm32u0` (STM32 U0 configuration) under `nuttx/arch/arm/src/stm32u0`, providing 2 header file(s) and 2 source file(s) (including `chip.h`, `stm32.h`, `stm32_rcc.c`, `stm32u0_rcc.c`).
+- `stm32u3`: [./stm32u3/README.md](./stm32u3/README.md) - Hardware abstraction and architecture package for `stm32u3` (STM32U3 Configuration Options) under `nuttx/arch/arm/src/stm32u3`, providing 4 header file(s) and 2 source file(s) (including `chip.h`, `stm32.h`, `stm32_lowputc.h`, `stm32_rcc_m33.h`).
+- `stm32u5`: [./stm32u5/README.md](./stm32u5/README.md) - Hardware abstraction and architecture package for `stm32u5` (STM32U5 Configuration Options) under `nuttx/arch/arm/src/stm32u5`, providing 12 header file(s) and 10 source file(s) (including `chip.h`, `stm32.h`, `stm32_exti.h`, `stm32_flash.h`).
+- `stm32wb`: [./stm32wb/README.md](./stm32wb/README.md) - Hardware abstraction and architecture package for `stm32wb` (STM32WB Configuration Options) under `nuttx/arch/arm/src/stm32wb`, providing 22 header file(s) and 32 source file(s) (including `chip.h`, `stm32.h`, `stm32wb_blehci.h`, `stm32wb_dma.h`).
+- `stm32wl5`: [./stm32wl5/README.md](./stm32wl5/README.md) - Hardware abstraction and architecture package for `stm32wl5` (STM32WL5 Configuration Options) under `nuttx/arch/arm/src/stm32wl5`, providing 14 header file(s) and 14 source file(s) (including `chip.h`, `stm32.h`, `stm32wl5_exti.h`, `stm32wl5_flash.h`).
+- `str71x`: [./str71x/README.md](./str71x/README.md) - Hardware abstraction and architecture package for `str71x` (STR71x Configuration Options; STR71x Peripheral Selections) under `nuttx/arch/arm/src/str71x`, providing 20 header file(s) and 7 source file(s) (including `chip.h`, `str71x.h`, `str71x_adc12.h`, `str71x_apb.h`).
+- `tiva`: [./tiva/README.md](./tiva/README.md) - Hardware abstraction and architecture package for `tiva` (Tiva/Stellaris Configuration Options; Tiva/Stellaris Peripheral Support) under `nuttx/arch/arm/src/tiva`, providing 23 header file(s) and 0 source file(s) (including `chip.h`, `tiva_adc.h`, `tiva_can.h`, `tiva_chipinfo.h`).
+- `tlsr82`: [./tlsr82/README.md](./tlsr82/README.md) - Hardware abstraction and architecture package for `tlsr82` (TLSR82XX Configuration Options; TLSR82 Peripheral Support) under `nuttx/arch/arm/src/tlsr82`, providing 18 header file(s) and 20 source file(s) (including `chip.h`, `tlsr82_adc.h`, `tlsr82_analog.h`, `tlsr82_clock.h`).
+- `tms570`: [./tms570/README.md](./tms570/README.md) - Hardware abstraction and architecture package for `tms570` (TMS570 Configuration Options; TMS570 Peripheral Support) under `nuttx/arch/arm/src/tms570`, providing 8 header file(s) and 10 source file(s) (including `chip.h`, `tms570_boot.h`, `tms570_clockconfig.h`, `tms570_esm.h`).
+- `xmc4`: [./xmc4/README.md](./xmc4/README.md) - Hardware abstraction and architecture package for `xmc4` (XMC4xxx Configuration Options; XMC4xxx Peripheral Support) under `nuttx/arch/arm/src/xmc4`, providing 17 header file(s) and 22 source file(s) (including `chip.h`, `xmc4_ccu4.h`, `xmc4_clockconfig.h`, `xmc4_config.h`).
+
+## Interface
+- `[Makefile:CHIP_CSRCS]`
+- `[Makefile:CMN_CSRCS]`
+- `[Makefile:HEAD_ASRC]`
+- `[Makefile:CSRCS]`
+- `[Makefile:ASRCS]`
+- [./a1x/README.md](./a1x/README.md)
+- [./am335x/README.md](./am335x/README.md)
+- [./am67/README.md](./am67/README.md)
+- [./arm/README.md](./arm/README.md)
+- [./armv6-m/README.md](./armv6-m/README.md)
+- [./armv7-a/README.md](./armv7-a/README.md)
+- [./armv7-m/README.md](./armv7-m/README.md)
+- [./armv7-r/README.md](./armv7-r/README.md)
+- [./armv8-m/README.md](./armv8-m/README.md)
+- [./armv8-r/README.md](./armv8-r/README.md)
+- [./at32/README.md](./at32/README.md)
+- [./c5471/README.md](./c5471/README.md)
+- [./common/README.md](./common/README.md)
+- [./csk6/README.md](./csk6/README.md)
+- [./cxd32xx/README.md](./cxd32xx/README.md)
+- [./cxd56xx/README.md](./cxd56xx/README.md)
+- [./dm320/README.md](./dm320/README.md)
+- [./efm32/README.md](./efm32/README.md)
+- [./eoss3/README.md](./eoss3/README.md)
+- [./fvp-v8r-aarch32/README.md](./fvp-v8r-aarch32/README.md)
+- [./gd32f4/README.md](./gd32f4/README.md)
+- [./gd32w51x/README.md](./gd32w51x/README.md)
+- [./goldfish/README.md](./goldfish/README.md)
+- [./ht32f491x3/README.md](./ht32f491x3/README.md)
+- [./imx1/README.md](./imx1/README.md)
+- [./imx6/README.md](./imx6/README.md)
+- [./imx9/README.md](./imx9/README.md)
+- [./imxrt/README.md](./imxrt/README.md)
+- [./kinetis/README.md](./kinetis/README.md)
+- [./kl/README.md](./kl/README.md)
+- [./lc823450/README.md](./lc823450/README.md)
+- [./lpc17xx_40xx/README.md](./lpc17xx_40xx/README.md)
+- [./lpc214x/README.md](./lpc214x/README.md)
+- [./lpc2378/README.md](./lpc2378/README.md)
+- [./lpc31xx/README.md](./lpc31xx/README.md)
+- [./lpc43xx/README.md](./lpc43xx/README.md)
+- [./lpc54xx/README.md](./lpc54xx/README.md)
+- [./max326xx/README.md](./max326xx/README.md)
+- [./mcx-nxxx/README.md](./mcx-nxxx/README.md)
+- [./moxart/README.md](./moxart/README.md)
+- [./mps/README.md](./mps/README.md)
+- [./mx8mp/README.md](./mx8mp/README.md)
+- [./n32h7/README.md](./n32h7/README.md)
+- [./nrf52/README.md](./nrf52/README.md)
+- [./nrf53/README.md](./nrf53/README.md)
+- [./nrf54l/README.md](./nrf54l/README.md)
+- [./nrf91/README.md](./nrf91/README.md)
+- [./nuc1xx/README.md](./nuc1xx/README.md)
+- [./phy62xx/README.md](./phy62xx/README.md)
+- [./qemu/README.md](./qemu/README.md)
+- [./ra4/README.md](./ra4/README.md)
+- [./ra8m1/README.md](./ra8m1/README.md)
+- [./rm57/README.md](./rm57/README.md)
+- [./rp2040/README.md](./rp2040/README.md)
+- [./rp23xx/README.md](./rp23xx/README.md)
+- [./rtl8720c/README.md](./rtl8720c/README.md)
+- [./rtl8720f/README.md](./rtl8720f/README.md)
+- [./rtl8721dx/README.md](./rtl8721dx/README.md)
+- [./rtl8721f/README.md](./rtl8721f/README.md)
+- [./rtl8730e/README.md](./rtl8730e/README.md)
+- [./s32k1xx/README.md](./s32k1xx/README.md)
+- [./s32k3xx/README.md](./s32k3xx/README.md)
+- [./sam34/README.md](./sam34/README.md)
+- [./sama5/README.md](./sama5/README.md)
+- [./samd2l2/README.md](./samd2l2/README.md)
+- [./samd5e5/README.md](./samd5e5/README.md)
+- [./samv7/README.md](./samv7/README.md)
+- [./stm32c0/README.md](./stm32c0/README.md)
+- [./stm32c5/README.md](./stm32c5/README.md)
+- [./stm32f0/README.md](./stm32f0/README.md)
+- [./stm32f1/README.md](./stm32f1/README.md)
+- [./stm32f2/README.md](./stm32f2/README.md)
+- [./stm32f3/README.md](./stm32f3/README.md)
+- [./stm32f4/README.md](./stm32f4/README.md)
+- [./stm32f7/README.md](./stm32f7/README.md)
+- [./stm32g0/README.md](./stm32g0/README.md)
+- [./stm32g4/README.md](./stm32g4/README.md)
+- [./stm32h5/README.md](./stm32h5/README.md)
+- [./stm32h7/README.md](./stm32h7/README.md)
+- [./stm32l0/README.md](./stm32l0/README.md)
+- [./stm32l1/README.md](./stm32l1/README.md)
+- [./stm32l4/README.md](./stm32l4/README.md)
+- [./stm32l5/README.md](./stm32l5/README.md)
+- [./stm32n6/README.md](./stm32n6/README.md)
+- [./stm32u0/README.md](./stm32u0/README.md)
+- [./stm32u3/README.md](./stm32u3/README.md)
+- [./stm32u5/README.md](./stm32u5/README.md)
+- [./stm32wb/README.md](./stm32wb/README.md)
+- [./stm32wl5/README.md](./stm32wl5/README.md)
+- [./str71x/README.md](./str71x/README.md)
+- [./tiva/README.md](./tiva/README.md)
+- [./tlsr82/README.md](./tlsr82/README.md)
+- [./tms570/README.md](./tms570/README.md)
+- [./xmc4/README.md](./xmc4/README.md)
+
+## Invariants
+- `[a1x_boot.c:DEBUGASSERT]` Enforces runtime precondition and state assertions via `DEBUGASSERT`
+- `[a1x_boot.c:#error]` Compile-time configuration constraint: High vector remap cannot be performed if we are using a ROM page table
+- `[a1x_irq.c:DEBUGASSERT]` Enforces runtime precondition and state assertions via `DEBUGASSERT`
+- `[a1x_irq.c:enter_critical_section]` Requires critical section serialization (`enter_critical_section` / `leave_critical_section`) across state and register updates
+- `[a1x_lowputc.c:#error]` Compile-time configuration constraint: No CONFIG_UARTn_SERIAL_CONSOLE Setting
+- `[a1x_pio.c:enter_critical_section]` Requires critical section serialization (`enter_critical_section` / `leave_critical_section`) across state and register updates
+
+## Side Effects
+- `[a1x_irq.c:putreg32]` Mutates 32-bit memory-mapped I/O (MMIO) hardware registers (`putreg32`)
+- `[a1x_irq.c:getreg32]` Reads volatile 32-bit memory-mapped hardware status/control registers (`getreg32`)
+- `[a1x_irq.c:up_enable_irq]` Enables hardware interrupt lines in the interrupt controller (`up_enable_irq`)
+- `[a1x_irq.c:up_disable_irq]` Disables hardware interrupt lines in the interrupt controller (`up_disable_irq`)
+- `[a1x_lowputc.c:putreg32]` Mutates 32-bit memory-mapped I/O (MMIO) hardware registers (`putreg32`)
+- `[a1x_lowputc.c:getreg32]` Reads volatile 32-bit memory-mapped hardware status/control registers (`getreg32`)
+
+## Verification
+- Run: `make test`

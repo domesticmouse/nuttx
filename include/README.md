@@ -1,0 +1,243 @@
+# NuttX System and Standard C/POSIX Headers (`include`)
+
+## Overview
+Standard C, POSIX, BSD/GNU compatibility, and user-facing system header files providing declarations for standard I/O and formatting (`stdio.h`, `stdio_ext.h`, `wchar.h`, `inttypes.h`), memory and string manipulation (`stdlib.h`, `malloc.h`, `alloca.h`, `string.h`, `strings.h`, `memory.h`, `byteswap.h`, `lzf.h`, `hex2bin.h`), character types and localization (`ctype.h`, `wctype.h`, `locale.h`, `langinfo.h`, `libintl.h`, `nl_types.h`, `iconv.h`), process, thread, and signal control (`unistd.h`, `sched.h`, `pthread.h`, `threads.h`, `spawn.h`, `signal.h`, `ucontext.h`, `errno.h`, `assert.h`, `err.h`, `execinfo.h`, `ulimit.h`), synchronization and IPC (`semaphore.h`, `mqueue.h`), filesystems, directories, and I/O multiplexing (`fcntl.h`, `dirent.h`, `aio.h`, `poll.h`, `ftw.h`, `fnmatch.h`, `glob.h`, `libgen.h`, `paths.h`, `utime.h`, `termios.h`, `pty.h`), networking and name resolution (`netdb.h`, `resolv.h`, `ifaddrs.h`), user/group databases (`pwd.h`, `grp.h`, `shadow.h`), dynamic linking and ELF formats (`dlfcn.h`, `elf.h`, `elf32.h`, `elf64.h`), system logging and tracing (`syslog.h`, `debug.h`, `gcov.h`, `syscall.h`), timekeeping (`time.h`), fixed-point math and search structures (`fixedmath.h`, `search.h`, `regex.h`), and fundamental C types/limits (`stdint.h`, `stdbool.h`, `stddef.h`, `stdnoreturn.h`, `limits.h`, `iso646.h`, `endian.h`), along with kernel internal headers under `nuttx/` and POSIX/BSD/C++ subsystem header directories.
+
+## Interface
+- `[aio.h:struct aiocb]`
+- `[aio.h:aio_read]`
+- `[aio.h:aio_write]`
+- `[aio.h:aio_error]`
+- `[aio.h:aio_return]`
+- `[aio.h:aio_cancel]`
+- `[aio.h:aio_suspend]`
+- `[aio.h:aio_fsync]`
+- `[aio.h:lio_listio]`
+- `[alloca.h:alloca]`
+- `[assert.h:PANIC]`
+- `[assert.h:ASSERT]`
+- `[assert.h:DEBUGASSERT]`
+- `[assert.h:static_assert]`
+- `[assert.h:_assert]`
+- `[assert.h:__assert]`
+- `[byteswap.h:bswap_16]`
+- `[byteswap.h:bswap_32]`
+- `[byteswap.h:bswap_64]`
+- `[ctype.h:isalnum]`
+- `[ctype.h:isalpha]`
+- `[ctype.h:isdigit]`
+- `[ctype.h:isspace]`
+- `[ctype.h:tolower]`
+- `[ctype.h:toupper]`
+- `[dirent.h:struct dirent]`
+- `[dirent.h:DIR]`
+- `[dirent.h:opendir]`
+- `[dirent.h:readdir]`
+- `[dirent.h:closedir]`
+- `[dirent.h:scandir]`
+- `[dlfcn.h:dlopen]`
+- `[dlfcn.h:dlsym]`
+- `[dlfcn.h:dlclose]`
+- `[dlfcn.h:dlerror]`
+- `[dlfcn.h:dladdr]`
+- `[elf.h:Elf_Ehdr]`
+- `[elf.h:Elf_Phdr]`
+- `[elf.h:Elf_Shdr]`
+- `[elf.h:Elf_Sym]`
+- `[elf32.h:Elf32_Ehdr]`
+- `[elf64.h:Elf64_Ehdr]`
+- `[err.h:err]`
+- `[err.h:warn]`
+- `[errno.h:errno]`
+- `[errno.h:set_errno]`
+- `[errno.h:get_errno]`
+- `[errno.h:__errno]`
+- `[execinfo.h:backtrace]`
+- `[execinfo.h:backtrace_symbols]`
+- `[fcntl.h:open]`
+- `[fcntl.h:openat]`
+- `[fcntl.h:fcntl]`
+- `[fixedmath.h:b16_t]`
+- `[fixedmath.h:ub16_t]`
+- `[fixedmath.h:b16sin]`
+- `[fixedmath.h:b16cos]`
+- `[fnmatch.h:fnmatch]`
+- `[ftw.h:ftw]`
+- `[ftw.h:nftw]`
+- `[glob.h:glob]`
+- `[glob.h:globfree]`
+- `[grp.h:getgrnam]`
+- `[grp.h:getgrgid]`
+- `[hex2bin.h:hex2bin]`
+- `[iconv.h:iconv_open]`
+- `[iconv.h:iconv]`
+- `[iconv.h:iconv_close]`
+- `[ifaddrs.h:getifaddrs]`
+- `[ifaddrs.h:freeifaddrs]`
+- `[inttypes.h:strtoimax]`
+- `[inttypes.h:strtoumax]`
+- `[langinfo.h:nl_langinfo]`
+- `[libgen.h:basename]`
+- `[libgen.h:dirname]`
+- `[libintl.h:gettext]`
+- `[libintl.h:dgettext]`
+- `[limits.h:PATH_MAX]`
+- `[limits.h:NAME_MAX]`
+- `[locale.h:setlocale]`
+- `[locale.h:localeconv]`
+- `[lzf.h:lzf_compress]`
+- `[lzf.h:lzf_decompress]`
+- `[malloc.h:mallinfo]`
+- `[mqueue.h:mqd_t]`
+- `[mqueue.h:mq_open]`
+- `[mqueue.h:mq_send]`
+- `[mqueue.h:mq_receive]`
+- `[mqueue.h:mq_close]`
+- `[netdb.h:getaddrinfo]`
+- `[netdb.h:freeaddrinfo]`
+- `[netdb.h:gethostbyname]`
+- `[nl_types.h:catopen]`
+- `[nl_types.h:catgets]`
+- `[nl_types.h:catclose]`
+- `[poll.h:struct pollfd]`
+- `[poll.h:poll]`
+- `[poll.h:ppoll]`
+- `[pthread.h:pthread_t]`
+- `[pthread.h:pthread_create]`
+- `[pthread.h:pthread_join]`
+- `[pthread.h:pthread_mutex_lock]`
+- `[pthread.h:pthread_mutex_unlock]`
+- `[pthread.h:pthread_cond_wait]`
+- `[pthread.h:pthread_cond_signal]`
+- `[pty.h:openpty]`
+- `[pty.h:forkpty]`
+- `[pwd.h:getpwnam]`
+- `[pwd.h:getpwuid]`
+- `[regex.h:regcomp]`
+- `[regex.h:regexec]`
+- `[regex.h:regfree]`
+- `[resolv.h:res_init]`
+- `[resolv.h:res_query]`
+- `[sched.h:sched_setparam]`
+- `[sched.h:sched_getparam]`
+- `[sched.h:sched_setscheduler]`
+- `[sched.h:sched_getscheduler]`
+- `[sched.h:sched_yield]`
+- `[search.h:hsearch]`
+- `[search.h:tsearch]`
+- `[search.h:lsearch]`
+- `[semaphore.h:sem_t]`
+- `[semaphore.h:sem_init]`
+- `[semaphore.h:sem_wait]`
+- `[semaphore.h:sem_post]`
+- `[semaphore.h:sem_destroy]`
+- `[signal.h:sigaction]`
+- `[signal.h:sigprocmask]`
+- `[signal.h:kill]`
+- `[signal.h:sigqueue]`
+- `[signal.h:sigwaitinfo]`
+- `[spawn.h:posix_spawn]`
+- `[spawn.h:posix_spawnp]`
+- `[stdio.h:FILE]`
+- `[stdio.h:fopen]`
+- `[stdio.h:fclose]`
+- `[stdio.h:fread]`
+- `[stdio.h:fwrite]`
+- `[stdio.h:printf]`
+- `[stdio.h:snprintf]`
+- `[stdio.h:vsnprintf]`
+- `[stdlib.h:malloc]`
+- `[stdlib.h:calloc]`
+- `[stdlib.h:realloc]`
+- `[stdlib.h:free]`
+- `[stdlib.h:strtol]`
+- `[stdlib.h:strtoul]`
+- `[stdlib.h:strtod]`
+- `[stdlib.h:qsort]`
+- `[stdlib.h:bsearch]`
+- `[stdlib.h:exit]`
+- `[stdlib.h:abort]`
+- `[string.h:memcpy]`
+- `[string.h:memmove]`
+- `[string.h:memset]`
+- `[string.h:memcmp]`
+- `[string.h:strlen]`
+- `[string.h:strcpy]`
+- `[string.h:strncpy]`
+- `[string.h:strcmp]`
+- `[string.h:strncmp]`
+- `[strings.h:strcasecmp]`
+- `[strings.h:strncasecmp]`
+- `[syscall.h:sys_call0]`
+- `[syscall.h:sys_call1]`
+- `[syscall.h:sys_call2]`
+- `[syscall.h:sys_call3]`
+- `[syscall.h:sys_call4]`
+- `[syscall.h:sys_call5]`
+- `[syscall.h:sys_call6]`
+- `[syslog.h:syslog]`
+- `[syslog.h:vsyslog]`
+- `[syslog.h:setlogmask]`
+- `[termios.h:struct termios]`
+- `[termios.h:tcgetattr]`
+- `[termios.h:tcsetattr]`
+- `[threads.h:thrd_create]`
+- `[threads.h:mtx_lock]`
+- `[threads.h:cnd_wait]`
+- `[time.h:clock_gettime]`
+- `[time.h:clock_settime]`
+- `[time.h:nanosleep]`
+- `[time.h:timer_create]`
+- `[time.h:timer_settime]`
+- `[time.h:gmtime_r]`
+- `[time.h:localtime_r]`
+- `[time.h:mktime]`
+- `[time.h:strftime]`
+- `[ucontext.h:getcontext]`
+- `[ucontext.h:setcontext]`
+- `[ucontext.h:makecontext]`
+- `[ucontext.h:swapcontext]`
+- `[unistd.h:read]`
+- `[unistd.h:write]`
+- `[unistd.h:close]`
+- `[unistd.h:lseek]`
+- `[unistd.h:dup]`
+- `[unistd.h:dup2]`
+- `[unistd.h:pipe]`
+- `[unistd.h:chdir]`
+- `[unistd.h:getcwd]`
+- `[unistd.h:unlink]`
+- `[unistd.h:rmdir]`
+- `[unistd.h:sleep]`
+- `[unistd.h:usleep]`
+- `[unistd.h:getpid]`
+- `[unistd.h:getopt]`
+- `[utime.h:utime]`
+- `[wchar.h:wcslen]`
+- `[wchar.h:mbrtowc]`
+- `[wchar.h:wcrtomb]`
+- `[wctype.h:iswctype]`
+- `[wctype.h:towlower]`
+- `[wctype.h:towupper]`
+- [`android`](./android/README.md) - Android Bionic `fdsan.h` file descriptor sanitizer compatibility headers.
+- [`arpa`](./arpa/README.md) - POSIX `<arpa/inet.h>` and `<arpa/nameser.h>` internet address and DNS protocol headers.
+- [`crypto`](./crypto/README.md) - OpenBSD-compatible `<crypto/cryptodev.h>` user/kernel cryptographic session and algorithm headers.
+- [`cxx`](./cxx/README.md) - Minimal C++ standard library wrapper headers (`<cassert>`, `<cmath>`, `<cstdio>`, `<cstdlib>`, `<cstring>`, etc.).
+- [`net`](./net/README.md) - POSIX/BSD `<net/if.h>`, `<net/route.h>`, `<net/ethernet.h>`, and `<net/if_arp.h>` network interface headers.
+- [`netinet`](./netinet/README.md) - `<netinet/in.h>`, `<netinet/ip.h>`, `<netinet/tcp.h>`, `<netinet/udp.h>`, `<netinet/ip_icmp.h>`, and `<netinet/ether.h>` internet protocol headers.
+- [`netpacket`](./netpacket/README.md) - Raw packet (`<netpacket/packet.h>`), Bluetooth, IEEE 802.15.4, and Netlink (`<netpacket/netlink.h>`) socket address headers.
+- [`nuttx`](./nuttx/README.md) - Core NuttX kernel, architecture, driver, filesystem, memory management, and subsystem internal headers.
+- [`ssp`](./ssp/README.md) - Compiler Stack Smashing Protector (`<ssp/ssp.h>`, `<ssp/stdio.h>`, `<ssp/string.h>`, `<ssp/unistd.h>`) bounds-checking headers.
+- [`sys`](./sys/README.md) - POSIX `<sys/*>` system headers (`stat.h`, `socket.h`, `ioctl.h`, `mman.h`, `wait.h`, `select.h`, `epoll.h`, `eventfd.h`, `timerfd.h`, `Signalfd.h`, `prctl.h`, `utsname.h`, `uio.h`, `syscall_lookup.h`).
+
+## Invariants
+- `[assert.h:COMPILE_TIME_ASSERT]` and `[assert.h:BUILD_BUG_ON_ZERO]` evaluate conditions at compile time and fail compilation if violated.
+- `[errno.h:errno]` expands to `(*__errno())` providing per-thread error state via Thread-Local Storage.
+- `[limits.h]` and `[stdint.h]` derive fixed-width and architectural type bounds from `<arch/limits.h>` and `<arch/types.h>`.
+
+## Side Effects
+- `[errno.h:set_errno]` mutates the calling thread's TLS `errno` slot via `*__errno() = (e)`.
+- `[assert.h:PANIC]` and `[assert.h:ASSERT]` invoke `_assert()` on failure, halting or resetting the task/system.
+
+## Verification
+- Run: `make test`

@@ -1,0 +1,43 @@
+# `esp32s3-xiao/src` Component (`boards/xtensa/esp32s3/esp32s3-xiao/src`)
+
+## Overview
+Board-level C implementation (`src`) for `esp32s3-xiao` (`xtensa/esp32s3`). Provides hardware initialization, peripheral bring-up, GPIO/pinmux setup, and driver registration across 8 source file(s).
+
+## Interface
+- `[Make.defs:CSRCS]` Registered build sources in `Make.defs`
+- `[esp32s3-xiao.h:esp32s3_bringup]` Public declaration `esp32s3_bringup()`
+- `[esp32s3-xiao.h:esp32s3_gpio_init]` Public declaration `esp32s3_gpio_init()`
+- `[esp32s3-xiao.h:board_i2c_init]` Public declaration `board_i2c_init()`
+- `[esp32s3-xiao.h:board_lsm6ds3trc_initialize]` Public declaration `board_lsm6ds3trc_initialize()`
+- `[esp32s3-xiao.h:esp_openeth_initialize]` Public declaration `esp_openeth_initialize()`
+- `[esp32s3-xiao.h:board_spiflash_init]` Public declaration `board_spiflash_init()`
+- `[esp32s3_autoleds.c:board_autoled_initialize]` Public function `board_autoled_initialize()`
+- `[esp32s3_autoleds.c:board_autoled_on]` Public function `board_autoled_on()`
+- `[esp32s3_autoleds.c:board_autoled_off]` Public function `board_autoled_off()`
+- `[esp32s3_board_spi.c:esp32s3_spi2_status]` Public function `esp32s3_spi2_status()`
+- `[esp32s3_boot.c:esp32s3_board_initialize]` Public function `esp32s3_board_initialize()`
+- `[esp32s3_boot.c:board_late_initialize]` Public function `board_late_initialize()`
+- `[esp32s3_bringup.c:esp32s3_bringup]` Public function `esp32s3_bringup()`
+- `[esp32s3_gpio.c:esp32s3_gpio_init]` Public function `esp32s3_gpio_init()`
+- `[esp32s3_reset.c:board_reset]` Public function `board_reset()`
+- `[esp32s3_userleds.c:board_userled_initialize]` Public function `board_userled_initialize()`
+- `[esp32s3_userleds.c:board_userled]` Public function `board_userled()`
+- `[esp32s3_userleds.c:board_userled_all]` Public function `board_userled_all()`
+
+## Invariants
+- `[Make.defs:CONFIG_*]` Conditional compilation gated by `CONFIG_ARCH`, `CONFIG_ARCH_LEDS`, `CONFIG_BOARDCTL_RESET`, `CONFIG_DEV_GPIO`, `CONFIG_ESP32S3_SPI`
+- `[esp32s3_gpio.c:DEBUGASSERT]` Requires `esp32s3gpio != NULL && value != NULL`
+- `[esp32s3_gpio.c:DEBUGASSERT]` Requires `esp32s3gpio->id < BOARD_NGPIOOUT`
+- `[esp32s3_gpio.c:DEBUGASSERT]` Requires `esp32s3gpio != NULL`
+- `[esp32s3_gpio.c:#error]` Compile-time guard: `NGPIOINT is > 0 and GPIO interrupts aren't enabled`
+- `[esp32s3_reset.c:#error]` Compile-time guard: `CONFIG_BOARD_ASSERT_RESET_VALUE must not be equal to EXIT_SUCCESS`
+
+## Side Effects
+- `[esp32s3_autoleds.c:board_autoled_initialize]` Configures or drives hardware GPIO pins
+- `[esp32s3_bringup.c:esp32s3_bringup]` Initializes/registers kernel devices or filesystems (`board_lsm6ds3trc_initialize()`, `board_sdmmc_spi_initialize()`, `esp_openeth_initialize()`, `nx_mount()`, `userled_lower_initialize()`)
+- `[esp32s3_gpio.c:esp32s3_gpio_init]` Configures or drives hardware GPIO pins
+- `[esp32s3_gpio.c:esp32s3_gpio_init]` Initializes/registers kernel devices or filesystems (`gpio_pin_register()`)
+- `[esp32s3_userleds.c:board_userled_initialize]` Configures or drives hardware GPIO pins
+
+## Verification
+- Run: `./tools/configure.sh esp32s3-xiao:combo && make`

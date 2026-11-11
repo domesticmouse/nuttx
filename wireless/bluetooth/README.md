@@ -1,0 +1,126 @@
+# NuttX Bluetooth Low Energy Stack (`bluetooth`)
+
+## Overview
+Bluetooth Low Energy (BLE) host stack and network interface driver (`bt_netdev.c`), including HCI core and TX/RX work queues (`bt_hcicore.c`), connection management (`bt_conn.c`), L2CAP fixed channels (`bt_l2cap.c`), ATT server/client (`bt_att.c`), GATT database and operations (`bt_gatt.c`, `bt_services.c`, `bt_uuid.c`), Security Manager Protocol (`bt_smp.c`), key store (`bt_keys.c`), reference-counted buffer pool (`bt_buf.c`), POSIX mqueue wrappers (`bt_queue.c`), and `SIOCBT*` ioctl handlers (`bt_ioctl.c`).
+
+## Interface
+- `[bt_hcicore.c:g_btdev]`
+- `[bt_hcicore.c:bt_send]`
+- `[bt_hcicore.c:bt_initialize]`
+- `[bt_hcicore.c:bt_deinitialize]`
+- `[bt_hcicore.c:bt_driver_set]`
+- `[bt_hcicore.c:bt_driver_unset]`
+- `[bt_hcicore.c:bt_receive]`
+- `[bt_hcicore.c:bt_hci_cmd_create]`
+- `[bt_hcicore.c:bt_hci_cmd_send]`
+- `[bt_hcicore.c:bt_hci_cmd_send_sync]`
+- `[bt_hcicore.c:bt_start_advertising]`
+- `[bt_hcicore.c:bt_stop_advertising]`
+- `[bt_hcicore.c:bt_start_scanning]`
+- `[bt_hcicore.c:bt_stop_scanning]`
+- `[bt_hcicore.c:bt_le_scan_update]`
+- `[bt_hcicore.c:bt_conn_cb_register]`
+- `[bt_hcicore.c:bt_addr_str]`
+- `[bt_hcicore.c:bt_addr_le_str]`
+- `[bt_hcicore.c:bt_hci_cb_register]`
+- `[bt_netdev.c:bt_netdev_register]`
+- `[bt_netdev.c:bt_netdev_unregister]`
+- `[bt_buf.c:bt_buf_initialize]`
+- `[bt_buf.c:bt_buf_alloc]`
+- `[bt_buf.c:bt_buf_addref]`
+- `[bt_buf.c:bt_buf_release]`
+- `[bt_buf.c:bt_buf_extend]`
+- `[bt_buf.c:bt_buf_put_le16]`
+- `[bt_buf.c:bt_buf_push]`
+- `[bt_buf.c:bt_buf_consume]`
+- `[bt_buf.c:bt_buf_get_le16]`
+- `[bt_buf.c:bt_buf_tailroom]`
+- `[bt_buf.c:bt_buf_headroom]`
+- `[bt_conn.c:bt_conn_receive]`
+- `[bt_conn.c:bt_conn_send]`
+- `[bt_conn.c:bt_conn_add]`
+- `[bt_conn.c:bt_conn_set_state]`
+- `[bt_conn.c:bt_conn_lookup_handle]`
+- `[bt_conn.c:bt_conn_lookup_addr_le]`
+- `[bt_conn.c:bt_conn_lookup_state]`
+- `[bt_conn.c:bt_conn_addref]`
+- `[bt_conn.c:bt_conn_release]`
+- `[bt_conn.c:bt_conn_get_dst]`
+- `[bt_conn.c:bt_conn_security]`
+- `[bt_conn.c:bt_conn_set_auto_conn]`
+- `[bt_conn.c:bt_conn_disconnect]`
+- `[bt_conn.c:bt_conn_create_le]`
+- `[bt_conn.c:bt_conn_le_start_encryption]`
+- `[bt_conn.c:bt_conn_le_conn_update]`
+- `[bt_conn.c:bt_conn_initialize]`
+- `[bt_l2cap.c:bt_l2cap_chan_register]`
+- `[bt_l2cap.c:bt_l2cap_chan_default]`
+- `[bt_l2cap.c:bt_l2cap_connected]`
+- `[bt_l2cap.c:bt_l2cap_disconnected]`
+- `[bt_l2cap.c:bt_l2cap_encrypt_change]`
+- `[bt_l2cap.c:bt_l2cap_create_pdu]`
+- `[bt_l2cap.c:bt_l2cap_send]`
+- `[bt_l2cap.c:bt_l2cap_receive]`
+- `[bt_l2cap.c:bt_l2cap_update_conn_param]`
+- `[bt_l2cap.c:bt_l2cap_init]`
+- `[bt_att.c:bt_att_initialize]`
+- `[bt_att.c:bt_att_create_pdu]`
+- `[bt_att.c:bt_att_send]`
+- `[bt_att.c:bt_att_cancel]`
+- `[bt_gatt.c:bt_gatt_register]`
+- `[bt_gatt.c:bt_gatt_attr_read]`
+- `[bt_gatt.c:bt_gatt_attr_read_service]`
+- `[bt_gatt.c:bt_gatt_attr_read_included]`
+- `[bt_gatt.c:bt_gatt_attr_read_chrc]`
+- `[bt_gatt.c:bt_gatt_attr_read_ccc]`
+- `[bt_gatt.c:bt_gatt_attr_write_ccc]`
+- `[bt_gatt.c:bt_gatt_attr_read_cep]`
+- `[bt_gatt.c:bt_gatt_attr_read_cud]`
+- `[bt_gatt.c:bt_gatt_attr_read_pf]`
+- `[bt_gatt.c:bt_gatt_notify]`
+- `[bt_gatt.c:bt_gatt_connected]`
+- `[bt_gatt.c:bt_gatt_disconnected]`
+- `[bt_gatt.c:bt_gatt_foreach_attr]`
+- `[bt_gatt.c:bt_gatt_exchange_mtu]`
+- `[bt_gatt.c:bt_gatt_discover]`
+- `[bt_gatt.c:bt_gatt_discover_characteristic]`
+- `[bt_gatt.c:bt_gatt_discover_descriptor]`
+- `[bt_gatt.c:bt_gatt_read]`
+- `[bt_gatt.c:bt_gatt_write]`
+- `[bt_gatt.c:bt_gatt_cancel]`
+- `[bt_gatt.c:bt_gatt_read_multiple]`
+- `[bt_smp.c:bt_smp_auth_cb_register]`
+- `[bt_smp.c:bt_smp_initialize]`
+- `[bt_smp.c:bt_smp_send_security_req]`
+- `[bt_smp.c:bt_smp_send_pairing_req]`
+- `[bt_smp.c:bt_smp_irk_matches]`
+- `[bt_keys.c:bt_keys_get_addr]`
+- `[bt_keys.c:bt_keys_get_type]`
+- `[bt_keys.c:bt_keys_add_type]`
+- `[bt_keys.c:bt_keys_clear]`
+- `[bt_keys.c:bt_keys_find]`
+- `[bt_keys.c:bt_keys_find_irk]`
+- `[bt_queue.c:bt_queue_open]`
+- `[bt_queue.c:bt_queue_receive]`
+- `[bt_queue.c:bt_queue_send]`
+- `[bt_ioctl.c:btnet_ioctl]`
+- `[bt_uuid.c:bt_uuid_cmp]`
+- `[bt_services.c:bt_add_services]`
+
+## Invariants
+- `[bt_hcicore.c:bt_driver_set]` requires `btdev != NULL && btdev->open != NULL && btdev->send != NULL` and allows only one registered driver at a time (`g_btdev.btdev == NULL`, returning `-EALREADY` otherwise).
+- `[bt_hcicore.c:hci_initialize]` requires an LE-capable controller (`lmp_le_capable(g_btdev)`), returning `-ENODEV` otherwise.
+- `[bt_hcicore.c:bt_receive]` requires `len + BLUETOOTH_H4_HDRLEN <= CONFIG_IOB_BUFSIZE` and `type` in `{BT_ACL_IN, BT_EVT}`.
+- `[bt_buf.c:bt_buf_alloc]` requires `reserve_head <= CONFIG_IOB_BUFSIZE`; `[bt_buf.c:bt_buf_release]` asserts `buf->ref > 0`.
+- `[bt_att.c:range_is_valid]` requires `start > 0 && start <= end` for ATT attribute handle ranges; `[bt_att.c:check_perm]` enforces `BT_GATT_PERM_READ`, `BT_GATT_PERM_WRITE`, `BT_GATT_PERM_AUTHEN_MASK` (`conn->encrypt && conn->sec_level >= BT_SECURITY_HIGH`), and `BT_GATT_PERM_ENCRYPT_MASK`.
+- `[bt_smp.c:bt_smp_receive]` enforces pairing state machine ordering via `smp->allowed_cmds` bitmask (`bt_atomic_testclrbit(&smp->allowed_cmds, hdr->code)`) and exact expected PDU length (`g_smp_handlers[hdr->code].expect_len`).
+
+## Side Effects
+- `[bt_netdev.c:bt_netdev_register]` and `[bt_netdev.c:bt_netdev_unregister]` allocate/free `struct btnet_driver_s`, bind `btdev`, initialize/deinitialize the BT stack, register default GATT services via `bt_add_services`, and register/unregister the `NET_LL_BLUETOOTH` network device.
+- `[bt_hcicore.c:bt_initialize]` initializes the `bt_buf` pool, opens the `BT_HCI_TX` POSIX message queue, spawns the `'BT HCI Tx'` kernel thread (`hci_tx_kthread`), opens the HCI driver, runs synchronous HCI setup commands, and initializes L2CAP/ATT/SMP.
+- `[bt_hcicore.c:bt_receive]` allocates `struct bt_buf_s` and schedules `priority_rx_work` on `HPWORK` (for command complete/status/num completed packets) or `hci_rx_work` on `LPWORK`.
+- `[bt_conn.c:bt_conn_set_state]` opens/closes per-connection `BT_CONN_TX` mqueues, spawns/terminates `'BT Conn Tx'` kernel threads, restores `g_btdev.le_pkts_sem` credits on disconnect, and notifies L2CAP and registered connection callbacks.
+- `[bt_ioctl.c:btnet_ioctl]` mutates global scan/discovery/GATT read/write state, starts/stops advertising or scanning, initiates GATT operations, and blocks on completion semaphores (`nxsem_wait` / `nxsem_tickwait`).
+
+## Verification
+- Run: `make test`

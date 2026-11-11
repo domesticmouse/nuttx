@@ -1,0 +1,311 @@
+# NuttX Kernel and Driver Internal Headers (`include/nuttx`)
+
+## Overview
+Core NuttX kernel/OS internal and driver-facing header files defining architecture porting hooks (`arch.h`, `cache.h`, `progmem.h`, `irq.h`, `addrenv.h`, `fdpic.h`, `page.h`, `pgalloc.h`), board-level initialization and control hooks (`board.h`), compiler/toolchain portability abstractions (`compiler.h`), scheduler and task/thread/process management (`sched.h`, `sched_note.h`, `kthread.h`, `pthread.h`, `init.h`, `spawn.h`, `tls.h`, `userspace.h`, `cancelpt.h`, `atexit.h`), synchronization and atomic primitives (`atomic.h`, `spinlock.h`, `spinlock_type.h`, `mutex.h`, `semaphore.h`, `rwsem.h`, `seqlock.h`, `event.h`), timekeeping, watchdogs, and work queues (`clock.h`, `wdog.h`, `wqueue.h`), memory and stream utilities (`kmalloc.h`, `streams.h`, `circbuf.h`, `list.h`, `list_type.h`, `queue.h`, `hashtable.h`, `bits.h`, `crc8.h`, `crc16.h`, `crc32.h`, `crc64.h`, `nuttx.h`, `macro.h`, `memoryregion.h`), notification chains (`notifier.h`, `panic_notifier.h`, `reboot_notifier.h`), dynamic modules/ELF/symbols (`module.h`, `elf.h`, `symtab.h`, `environ.h`), debugging/tracing/coredump/GDB (`debug.h`, `trace.h`, `instrument.h`, `coredump.h`, `gdbstub.h`), and hardware/bus helpers (`fdt.h`, `ipcc.h`, `random.h`, `sdio.h`, `ascii.h`, `vt100.h`).
+
+## Interface
+- `[addrenv.h:struct addrenv_s]`
+- `[addrenv.h:addrenv_allocate]`
+- `[addrenv.h:addrenv_switch]`
+- `[addrenv.h:addrenv_attach]`
+- `[addrenv.h:addrenv_join]`
+- `[addrenv.h:addrenv_fork]`
+- `[addrenv.h:addrenv_leave]`
+- `[addrenv.h:addrenv_select]`
+- `[addrenv.h:addrenv_restore]`
+- `[addrenv.h:uaccess_ok]`
+- `[arch.h:up_initialize]`
+- `[arch.h:up_systempoweroff]`
+- `[arch.h:up_systemreset]`
+- `[arch.h:up_idle]`
+- `[arch.h:up_initial_state]`
+- `[arch.h:up_create_stack]`
+- `[arch.h:up_use_stack]`
+- `[arch.h:up_stack_frame]`
+- `[arch.h:up_release_stack]`
+- `[arch.h:up_switch_context]`
+- `[arch.h:up_exit]`
+- `[arch.h:up_schedule_sigaction]`
+- `[arch.h:up_task_start]`
+- `[arch.h:up_pthread_start]`
+- `[arch.h:up_allocate_heap]`
+- `[arch.h:up_allocate_kheap]`
+- `[arch.h:up_allocate_pgheap]`
+- `[arch.h:up_irqinitialize]`
+- `[arch.h:up_enable_irq]`
+- `[arch.h:up_disable_irq]`
+- `[arch.h:up_timer_initialize]`
+- `[arch.h:nxsched_process_timer]`
+- `[arch.h:irq_dispatch]`
+- `[atexit.h:atexit_register]`
+- `[atexit.h:atexit_call_exitfuncs]`
+- `[atomic.h:atomic_t]`
+- `[atomic.h:atomic64_t]`
+- `[atomic.h:atomic_set]`
+- `[atomic.h:atomic_read]`
+- `[atomic.h:atomic_add]`
+- `[atomic.h:atomic_sub]`
+- `[atomic.h:atomic_xchg]`
+- `[atomic.h:atomic_cmpxchg]`
+- `[bits.h:BIT]`
+- `[bits.h:GENMASK]`
+- `[bits.h:DECLARE_BITMAP]`
+- `[bits.h:set_bit]`
+- `[bits.h:clear_bit]`
+- `[bits.h:test_bit]`
+- `[board.h:board_early_initialize]`
+- `[board.h:board_late_initialize]`
+- `[board.h:board_app_finalinitialize]`
+- `[board.h:board_power_off]`
+- `[board.h:board_reset]`
+- `[board.h:board_ioctl]`
+- `[cache.h:up_enable_icache]`
+- `[cache.h:up_disable_icache]`
+- `[cache.h:up_invalidate_icache]`
+- `[cache.h:up_enable_dcache]`
+- `[cache.h:up_disable_dcache]`
+- `[cache.h:up_invalidate_dcache]`
+- `[cache.h:up_clean_dcache]`
+- `[cache.h:up_flush_dcache]`
+- `[cache.h:up_coherent_dcache]`
+- `[cancelpt.h:enter_cancellation_point]`
+- `[cancelpt.h:leave_cancellation_point]`
+- `[cancelpt.h:check_cancellation_point]`
+- `[circbuf.h:struct circbuf_s]`
+- `[circbuf.h:circbuf_init]`
+- `[circbuf.h:circbuf_uninit]`
+- `[circbuf.h:circbuf_read]`
+- `[circbuf.h:circbuf_write]`
+- `[clock.h:clock_ticks2time]`
+- `[clock.h:clock_time2ticks]`
+- `[clock.h:clock_systime_ticks]`
+- `[clock.h:clock_systime_timespec]`
+- `[clock.h:clock_synchronize]`
+- `[clock.h:nxclock_gettime]`
+- `[compiler.h:FAR]`
+- `[compiler.h:CODE]`
+- `[compiler.h:weak_function]`
+- `[compiler.h:noreturn_function]`
+- `[compiler.h:aligned_data]`
+- `[compiler.h:begin_packed_struct]`
+- `[compiler.h:end_packed_struct]`
+- `[coredump.h:coredump_add_memory_region]`
+- `[coredump.h:coredump]`
+- `[crc8.h:crc8]`
+- `[crc16.h:crc16]`
+- `[crc32.h:crc32]`
+- `[crc64.h:crc64]`
+- `[debug.h:_alert]`
+- `[debug.h:_err]`
+- `[debug.h:_warn]`
+- `[debug.h:_info]`
+- `[debug.h:lowsyslog]`
+- `[elf.h:up_checkarch]`
+- `[elf.h:up_relocate]`
+- `[elf.h:up_relocateadd]`
+- `[environ.h:env_foreach]`
+- `[environ.h:env_dup]`
+- `[environ.h:env_release]`
+- `[environ.h:env_sanitize_secure]`
+- `[event.h:nxevent_t]`
+- `[event.h:nxevent_init]`
+- `[event.h:nxevent_post]`
+- `[event.h:nxevent_wait]`
+- `[fdpic.h:struct fdpic_desc_s]`
+- `[fdpic.h:fdpic_init]`
+- `[fdpic.h:fdpic_invoke]`
+- `[fdt.h:fdt_register]`
+- `[fdt.h:fdt_get]`
+- `[gdbstub.h:gdb_state_init]`
+- `[gdbstub.h:gdb_process]`
+- `[hashtable.h:DECLARE_HASHTABLE]`
+- `[hashtable.h:hashtable_init]`
+- `[hashtable.h:hashtable_add]`
+- `[hashtable.h:hashtable_delete]`
+- `[init.h:g_nx_initstate]`
+- `[init.h:nx_start]`
+- `[instrument.h:instrument_register]`
+- `[ipcc.h:ipcc_register]`
+- `[irq.h:irq_attach]`
+- `[irq.h:irq_detach]`
+- `[irq.h:enter_critical_section]`
+- `[irq.h:leave_critical_section]`
+- `[kmalloc.h:kumm_malloc]`
+- `[kmalloc.h:kumm_zalloc]`
+- `[kmalloc.h:kumm_free]`
+- `[kmalloc.h:kmm_malloc]`
+- `[kmalloc.h:kmm_zalloc]`
+- `[kmalloc.h:kmm_free]`
+- `[kthread.h:kthread_create]`
+- `[kthread.h:kthread_delete]`
+- `[list.h:list_initialize]`
+- `[list.h:list_add_head]`
+- `[list.h:list_add_tail]`
+- `[list.h:list_delete]`
+- `[module.h:insmod]`
+- `[module.h:rmmod]`
+- `[mutex.h:mutex_t]`
+- `[mutex.h:rmutex_t]`
+- `[mutex.h:nxmutex_init]`
+- `[mutex.h:nxmutex_lock]`
+- `[mutex.h:nxmutex_unlock]`
+- `[mutex.h:nxrmutex_lock]`
+- `[mutex.h:nxrmutex_unlock]`
+- `[notifier.h:notifier_chain_register]`
+- `[notifier.h:notifier_call_chain]`
+- `[nuttx.h:IS_ALIGNED]`
+- `[nuttx.h:ALIGN_UP]`
+- `[nuttx.h:ALIGN_DOWN]`
+- `[nuttx.h:container_of]`
+- `[page.h:pg_miss]`
+- `[page.h:up_checkmapping]`
+- `[panic_notifier.h:panic_notifier_chain_register]`
+- `[pgalloc.h:mm_pginitialize]`
+- `[pgalloc.h:mm_pgalloc]`
+- `[pgalloc.h:mm_pgfree]`
+- `[progmem.h:up_progmem_write]`
+- `[progmem.h:up_progmem_eraseblock]`
+- `[pthread.h:nx_pthread_create]`
+- `[pthread.h:nx_pthread_exit]`
+- `[queue.h:sq_queue_t]`
+- `[queue.h:dq_queue_t]`
+- `[queue.h:sq_addlast]`
+- `[queue.h:dq_addlast]`
+- `[random.h:up_rngaddint]`
+- `[random.h:up_rngaddentropy]`
+- `[random.h:up_rngbuf]`
+- `[reboot_notifier.h:register_reboot_notifier]`
+- `[rwsem.h:rw_semaphore_t]`
+- `[rwsem.h:down_read]`
+- `[rwsem.h:up_read]`
+- `[rwsem.h:down_write]`
+- `[rwsem.h:up_write]`
+- `[sched.h:struct tcb_s]`
+- `[sched.h:struct task_group_s]`
+- `[sched.h:g_running_tasks]`
+- `[sched.h:nxsched_self]`
+- `[sched.h:nxsched_get_tcb]`
+- `[sched.h:nxtask_init]`
+- `[sched.h:nxtask_uninit]`
+- `[sched.h:nxtask_create]`
+- `[sched.h:nxtask_activate]`
+- `[sched_note.h:sched_note_start]`
+- `[sched_note.h:sched_note_stop]`
+- `[sdio.h:struct sdio_dev_s]`
+- `[semaphore.h:nxsem_init]`
+- `[semaphore.h:nxsem_wait]`
+- `[semaphore.h:nxsem_post]`
+- `[semaphore.h:nxsem_destroy]`
+- `[seqlock.h:seqlock_init]`
+- `[seqlock.h:read_seqbegin]`
+- `[seqlock.h:read_seqretry]`
+- `[seqlock.h:write_seqlock_irqsave]`
+- `[seqlock.h:write_sequnlock_irqrestore]`
+- `[signal.h:nxsig_procmask]`
+- `[signal.h:nxsig_action]`
+- `[signal.h:nxsig_kill]`
+- `[signal.h:nxsig_notification]`
+- `[spawn.h:add_file_action]`
+- `[spinlock.h:spin_lock_init]`
+- `[spinlock.h:spin_lock_irqsave]`
+- `[spinlock.h:spin_unlock_irqrestore]`
+- `[spinlock_type.h:spinlock_t]`
+- `[streams.h:struct lib_instream_s]`
+- `[streams.h:struct lib_outstream_s]`
+- `[streams.h:lib_sprintf]`
+- `[streams.h:lib_vsprintf]`
+- `[symtab.h:struct symtab_s]`
+- `[symtab.h:symtab_findbyname]`
+- `[symtab.h:symtab_findbyvalue]`
+- `[tls.h:struct tls_info_s]`
+- `[tls.h:tls_get_info]`
+- `[trace.h:trace_begin]`
+- `[trace.h:trace_end]`
+- `[userspace.h:struct userspace_s]`
+- `[wdog.h:struct wdog_s]`
+- `[wdog.h:wd_start]`
+- `[wdog.h:wd_cancel]`
+- `[wqueue.h:struct work_s]`
+- `[wqueue.h:work_queue]`
+- `[wqueue.h:work_cancel]`
+- [`1wire`](./1wire/README.md) - 1-Wire bus master, slave, and DS28E17 bridge driver interface headers.
+- [`aie`](./aie/README.md) - AI Engine (AIE) lower-half and ioctl interface headers.
+- [`analog`](./analog/README.md) - ADC, DAC, comparator, op-amp, PGA, and potentiometer driver headers.
+- [`audio`](./audio/README.md) - Audio subsystem upper/lower-half, pipeline buffer, and codec driver headers.
+- [`binfmt`](./binfmt/README.md) - Binary format loader (`struct binary_s`, `struct binfmt_s`), ELF, NXFLAT, and builtin headers.
+- [`can`](./can/README.md) - CAN character driver (`can.h`) and SocketCAN error frame headers.
+- [`clk`](./clk/README.md) - Clock tree (`clk.h`, `clk_provider.h`) interface headers.
+- [`contactless`](./contactless/README.md) - Contactless RFID/NFC (MFRC522, PN532) ioctl and driver headers.
+- [`coresight`](./coresight/README.md) - ARM CoreSight trace component and topology headers.
+- [`crypto`](./crypto/README.md) - Kernel cryptographic framework, `/dev/crypto`, BLAKE2s, and SE05x headers.
+- [`devfreq`](./devfreq/README.md) - Dynamic device frequency scaling (`devfreq.h`) governor and QoS headers.
+- [`dma`](./dma/README.md) - Generic DMA controller lower-half (`dma.h`) and DMA-BUF (`dma_buf.h`) headers.
+- [`drivers`](./drivers/README.md) - Core character/block driver registration, RAM disk, rwbuffer, and 1-Wire driver headers.
+- [`eeprom`](./eeprom/README.md) - I2C and SPI serial EEPROM driver headers.
+- [`efuse`](./efuse/README.md) - eFuse OTP memory controller ioctl and lower-half headers.
+- [`fs`](./fs/README.md) - Virtual File System (`fs.h`), inode, ioctl, mount, procfs, automount, smartfs, loop, and hostfs headers.
+- [`himem`](./himem/README.md) - ESP32 high-memory (`himem`) bank mapping driver headers.
+- [`hwspinlock`](./hwspinlock/README.md) - Hardware spinlock (`hwspinlock.h`) multi-core synchronization headers.
+- [`i2c`](./i2c/README.md) - I2C master/slave (`i2c_master.h`, `i2c_slave.h`), bit-bang, and multiplexer headers.
+- [`i3c`](./i3c/README.md) - MIPI I3C bus master, device, CCC, and driver headers.
+- [`input`](./input/README.md) - Touchscreen, keyboard, mouse, button, joystick, force-feedback, and touch controller headers.
+- [`ioexpander`](./ioexpander/README.md) - GPIO character driver (`gpio.h`) and I2C/SPI I/O expander (`ioexpander.h`) headers.
+- [`lcd`](./lcd/README.md) - LCD character/framebuffer driver (`lcd.h`) and display controller headers.
+- [`leds`](./leds/README.md) - User LED (`userled.h`) and PWM/RGB LED controller headers.
+- [`lib`](./lib/README.md) - Kernel-shared C library (`lib.h`), math, builtin, regex, and obstack headers.
+- [`math`](./math/README.md) - CORDIC, FFT, and MPI hardware math accelerator headers.
+- [`mbox`](./mbox/README.md) - Inter-processor mailbox (`mbox.h`) controller interface headers.
+- [`mm`](./mm/README.md) - Memory manager heap (`mm.h`), granule allocator (`gran.h`), IOB (`iob.h`), KASAN, kmap, mempool, and shm headers.
+- [`modem`](./modem/README.md) - Sony Altair ALT1250 cellular modem ioctl and protocol headers.
+- [`motor`](./motor/README.md) - DC motor, stepper motor, and Field-Oriented Control (`foc`) driver headers.
+- [`mtd`](./mtd/README.md) - Memory Technology Device (`mtd.h`), NAND, FTL, SMART, and flash chip headers.
+- [`net`](./net/README.md) - Kernel networking stack (`net.h`, `netdev.h`, `ip.h`, `tcp.h`, `udp.h`, `icmp.h`, `sixlowpan.h`, `netfilter`) headers.
+- [`note`](./note/README.md) - Scheduler instrumentation (`note_driver.h`, `noteram_driver.h`, `notelog_driver.h`) headers.
+- [`nx`](./nx/README.md) - NX graphics windowing (`nx.h`), multi-user server (`nxmu.h`), `nxglib`, `nxfonts`, `nxtk`, and `nxterm` headers.
+- [`pci`](./pci/README.md) - PCI/PCIe bus, controller, endpoint, and device ID headers.
+- [`pinctrl`](./pinctrl/README.md) - Pin control (`pinctrl.h`) lower-half and ioctl headers.
+- [`power`](./power/README.md) - Power management (`pm.h`), battery charger/gauge/monitor, regulator, and relay headers.
+- [`rc`](./rc/README.md) - Remote control (`lirc_dev.h`) infrared receiver/transmitter headers.
+- [`regmap`](./regmap/README.md) - Register map (`regmap.h`) bus abstraction headers.
+- [`reset`](./reset/README.md) - Hardware reset controller (`reset.h`, `reset-controller.h`) headers.
+- [`rf`](./rf/README.md) - RF attenuator and peripheral ioctl headers.
+- [`rpmsg`](./rpmsg/README.md) - RPMsg transport (`rpmsg.h`), router, port, virtio, and ping headers.
+- [`rptun`](./rptun/README.md) - Remote Processor Tunneling (`rptun.h`) OpenAMP remoteproc interface headers.
+- [`segger`](./segger/README.md) - SEGGER RTT (`rtt.h`) and SystemView (`sysview.h`) trace/console headers.
+- [`sensors`](./sensors/README.md) - Sensor framework (`sensor.h`), uORB topic structures, and sensor chip driver headers.
+- [`serial`](./serial/README.md) - UART/serial (`serial.h`), PTY, 16550, CMSDK, and RPMsg UART headers.
+- [`spi`](./spi/README.md) - SPI master/slave (`spi.h`, `slave.h`), QSPI (`qspi.h`), and bit-bang headers.
+- [`syslog`](./syslog/README.md) - System logging (`syslog.h`, `syslog_rpmsg.h`, `ramlog.h`) channel headers.
+- [`timers`](./timers/README.md) - Timer (`timer.h`), oneshot, freerunning, watchdog (`watchdog.h`), PWM (`pwm.h`), capture, QE, and RTC (`rtc.h`) headers.
+- [`usb`](./usb/README.md) - USB device (`usbdev.h`), USB host (`usbhost.h`), USB class (CDC, HID, MSC, Audio, DFU), and controller headers.
+- [`usrsock`](./usrsock/README.md) - Userspace socket (`usrsock.h`, `usrsock_rpmsg.h`) protocol headers.
+- [`vhost`](./vhost/README.md) - Virtual host (`vhost.h`) bus and driver headers.
+- [`video`](./video/README.md) - Video framebuffer (`fb.h`), V4L2 (`video.h`, `video_controls.h`), EDID (`edid.h`), VNC, and camera sensor headers.
+- [`virtio`](./virtio/README.md) - VirtIO bus, MMIO, PCI, and device driver headers.
+- [`wireless`](./wireless/README.md) - Wireless subsystem (`wireless.h`), Bluetooth, IEEE 802.11, IEEE 802.15.4, LPWAN, cellular, and LTE headers.
+
+## Invariants
+- `[addrenv.h:CONFIG_ARCH_USE_MMU]` requires `CONFIG_MM_PGALLOC` and `CONFIG_MM_PGSIZE`, and enforces page-boundary alignment (`(VBASE & CONFIG_MM_MASK) == 0`) on `CONFIG_ARCH_TEXT_VBASE`, `CONFIG_ARCH_DATA_VBASE`, `CONFIG_ARCH_HEAP_VBASE`, `CONFIG_ARCH_STACK_VBASE`, `CONFIG_ARCH_SHM_VBASE`, and `CONFIG_ARCH_KMAP_VBASE`.
+- `[addrenv.h:ARCH_DATA_RESERVE]` reserves `ARCH_DATA_RESERVE_SIZE` (`CONFIG_MM_PGSIZE` under `CONFIG_BUILD_KERNEL`) at the start of the user `.bss`/`.data` region (`CONFIG_ARCH_DATA_VBASE`) for `struct addrenv_reserve_s` (signal trampoline and user heap pointer).
+- `[addrenv.h:addrenv_select]` is explicitly documented as not safe to use from interrupt context.
+- `[clock.h:CLOCK_MASK]` requires `CONFIG_SYS_CLOCK_HW_CYCLES_PER_SEC` to be an exact power of two when `CONFIG_CLOCK_TIMEKEEPING` is enabled.
+- `[compiler.h:NUTTX_NO_EXTENSIONS]` saves and undefines/restores non-standard compiler helper macros (`weak_alias`, `memory_barrier`, `UNUSED`, `object_size`, etc.) via `#pragma push_macro`/`pop_macro` so user applications can keep those identifiers free.
+- `[irq.h:STACK_ALIGN_MASK]` enforces that `STACK_ALIGNMENT` and `STACKFRAME_ALIGNMENT` are powers of two so bitmask alignment macros (`STACK_ALIGN_DOWN`, `STACK_ALIGN_UP`) remain valid.
+- `[mutex.h:nxmutex_unlock]` and `[mutex.h:nxrmutex_unlock]` require the calling thread to be the current holder of the mutex.
+- `[page.h:CONFIG_LEGACY_PAGING]` requires `CONFIG_PG_LOCKED_NBASES + CONFIG_PG_PAGED_NBASES + CONFIG_PG_DATA_NBASES == CONFIG_PG_NPAGES` and enforces that virtual/physical base addresses are aligned to `PAGESIZE`.
+- `[sched.h:MAX_LOCK_COUNT]` caps `tcb_s.lockcount` at `127` (`INT8_MAX`); `[sched.h:g_running_tasks]` is only valid when `up_interrupt_context()` returns `true`.
+- `[semaphore.h:NXSEM_MHOLDER]` encodes the mutex holder TID in bits `0..30` and the blocking waiters bit (`NXSEM_MBLOCKING_BIT = 0x80000000`) in bit `31` of `val.mholder` when `CONFIG_PRIORITY_INHERITANCE` is enabled.
+- `[spinlock.h:rspin_lock]` and `[spinlock.h:rspin_unlock]` enforce via `DEBUGASSERT` that `RSPINLOCK_OWNER(val) == this_cpu() + 1` and nesting count stays within `1..UINT16_MAX`.
+- `[spinlock.h:read_unlock]` and `[spinlock.h:write_unlock]` enforce via `DEBUGASSERT` that the `rwlock_t` is currently read-locked (`>= RW_SP_READ_LOCKED`) or write-locked (`== RW_SP_WRITE_LOCKED`) respectively.
+- `[tls.h:TLS_STACK_ALIGN]` requires `CONFIG_TLS_LOG2_MAXSTACK` to define a power-of-two stack alignment so `TLS_INFO(sp)` can locate `struct tls_info_s` by masking the stack pointer with `~TLS_STACK_MASK`.
+- `[wdog.h:WDOG_MAX_DELAY]` restricts relative watchdog tick delays to `<= SCLOCK_MAX` (`(clock_t)UINT32_MAX >> 1` or `(clock_t)UINT64_MAX >> 1`) to prevent signed clock comparison wrap-around.
+
+## Side Effects
+- `[debug.h:lowsyslog]` instantiates a stack-local `lib_lowoutstream` and writes formatted characters directly to low-level console output via `lib_sprintf`.
+- `[fdpic.h:fdpic_invoke]` calls `up_fdpic_invoke(arg, desc->entry, desc->got)` when `desc->got != 0`, switching the CPU PIC base register before branching.
+- `[sched.h:nxtask_uninit]` deallocates the passed `struct tcb_s` via `kmm_free()` in addition to undoing `nxtask_init()` state.
+- `[seqlock.h:write_seqlock_irqsave]` disables local interrupts (and acquires spinlock under `CONFIG_SPINLOCK`) and increments `seqcount_t` twice across the critical section.
+- `[spinlock.h:spin_lock_irqsave]` and `[spinlock.h:write_lock_irqsave]` disable local CPU interrupts via `up_irq_save()`, acquire the spinlock/rwlock, emit scheduler note/critmon events, and execute memory/event barriers (`UP_DMB`, `SPIN_WAIT`, `SPIN_KICK`).
+
+## Verification
+- Run: `make test`

@@ -1,0 +1,60 @@
+# `esp32-devkitc/src` Component (`boards/xtensa/esp32/esp32-devkitc/src`)
+
+## Overview
+Board-level C implementation (`src`) for `esp32-devkitc` (`xtensa/esp32`). Provides hardware initialization, peripheral bring-up, GPIO/pinmux setup, and driver registration across 11 source file(s).
+
+## Interface
+- `[Make.defs:CSRCS]` Registered build sources in `Make.defs`
+- `[CMakeLists.txt:board]` CMake build target source registration
+- `[esp32-devkitc.h:esp32_bringup]` Public declaration `esp32_bringup()`
+- `[esp32-devkitc.h:esp32_gpio_init]` Public declaration `esp32_gpio_init()`
+- `[esp32-devkitc.h:esp32_pwm_setup]` Public declaration `esp32_pwm_setup()`
+- `[esp32-devkitc.h:board_spidev_initialize]` Public declaration `board_spidev_initialize()`
+- `[esp32-devkitc.h:esp32_twai_setup]` Public declaration `esp32_twai_setup()`
+- `[esp32-devkitc.h:board_i2sdev_initialize]` Public declaration `board_i2sdev_initialize()`
+- `[esp32-devkitc.h:esp32_cs4344_initialize]` Public declaration `esp32_cs4344_initialize()`
+- `[esp32-devkitc.h:board_ws2812_initialize]` Public declaration `board_ws2812_initialize()`
+- `[esp32-devkitc.h:esp_openeth_initialize]` Public declaration `esp_openeth_initialize()`
+- `[esp32-devkitc.h:BUTTON_BOOT]` Hardware/board configuration macros (`BUTTON_BOOT`, `GPIO_LED1`, `PCNT_QE0_ID`, `GPIO_MCP2515_IRQ`, `TIMER0`, `TIMER1` (+8 more))
+- `[esp32_boot.c:esp32_board_initialize]` Public function `esp32_board_initialize()`
+- `[esp32_boot.c:board_late_initialize]` Public function `board_late_initialize()`
+- `[esp32_bringup.c:esp32_bringup]` Public function `esp32_bringup()`
+- `[esp32_buttons.c:board_button_initialize]` Public function `board_button_initialize()`
+- `[esp32_buttons.c:board_buttons]` Public function `board_buttons()`
+- `[esp32_buttons.c:board_button_irq]` Public function `board_button_irq()`
+- `[esp32_gpio.c:esp32_gpio_init]` Public function `esp32_gpio_init()`
+- `[esp32_ledc.c:esp32_pwm_setup]` Public function `esp32_pwm_setup()`
+- `[esp32_reset.c:board_reset]` Public function `board_reset()`
+- `[esp32_twai.c:esp32_twai_setup]` Public function `esp32_twai_setup()`
+- `[esp32_userleds.c:board_userled_initialize]` Public function `board_userled_initialize()`
+- `[esp32_userleds.c:board_userled]` Public function `board_userled()`
+- `[esp32_userleds.c:board_userled_all]` Public function `board_userled_all()`
+- *(+2 additional symbols across 11 files)*
+
+## Invariants
+- `[Make.defs:CONFIG_*]` Conditional compilation gated by `CONFIG_ARCH`, `CONFIG_ARCH_BUTTONS`, `CONFIG_BOARDCTL_RESET`, `CONFIG_DEV_GPIO`, `CONFIG_ESP32_TWAI`, `CONFIG_NET_W5500` (+3 more)
+- `[esp32_gpio.c:DEBUGASSERT]` Requires `esp32gpio != NULL && value != NULL`
+- `[esp32_gpio.c:DEBUGASSERT]` Requires `esp32gpio->id < BOARD_NGPIOOUT`
+- `[esp32_gpio.c:DEBUGASSERT]` Requires `esp32gpio != NULL`
+- `[esp32_gpio.c:#error]` Compile-time guard: `NGPIOINT is > 0 and GPIO interrupts aren't enabled`
+- `[esp32_ledc.c:esp32_pwm_setup]` Validates preconditions and returns `-ENODEV` on failure
+- `[esp32_reset.c:#error]` Compile-time guard: `CONFIG_BOARD_ASSERT_RESET_VALUE must not be equal to EXIT_SUCCESS`
+- `[esp32_twai.c:esp32_twai_setup]` Validates preconditions and returns `-ENODEV` on failure
+- `[esp32_w5500.c:DEBUGASSERT]` Requires `priv->handler`
+- `[esp32_w5500.c:#error]` Compile-time guard: `Need CONFIG_ESP32_SPI2 in the configuration`
+- `[esp32_ws2812.c:board_ws2812_initialize]` Validates preconditions and returns `-ENODEV` on failure
+
+## Side Effects
+- `[esp32_bringup.c:esp32_bringup]` Initializes/registers kernel devices or filesystems (`board_apds9960_initialize()`, `board_bmp180_initialize()`, `board_bmp280_initialize()`, `board_capture_initialize()`, `board_dac_initialize()`)
+- `[esp32_buttons.c:board_button_initialize]` Configures or drives hardware GPIO pins
+- `[esp32_gpio.c:esp32_gpio_init]` Configures or drives hardware GPIO pins
+- `[esp32_gpio.c:esp32_gpio_init]` Initializes/registers kernel devices or filesystems (`gpio_pin_register()`)
+- `[esp32_ledc.c:esp32_pwm_setup]` Initializes/registers kernel devices or filesystems (`pwm_register()`)
+- `[esp32_twai.c:esp32_twai_setup]` Initializes/registers kernel devices or filesystems (`can_register()`)
+- `[esp32_userleds.c:board_userled_initialize]` Configures or drives hardware GPIO pins
+- `[esp32_w5500.c:riscv_netinitialize]` Configures or drives hardware GPIO pins
+- `[esp32_w5500.c:riscv_netinitialize]` Initializes/registers kernel devices or filesystems (`esp32_spibus_initialize()`, `w5500_initialize()`)
+- `[esp32_ws2812.c:board_ws2812_initialize]` Initializes/registers kernel devices or filesystems (`esp32_spibus_initialize()`, `ws2812_leds_register()`)
+
+## Verification
+- Run: `./tools/configure.sh esp32-devkitc:nsh && make`

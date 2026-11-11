@@ -1,0 +1,16 @@
+# `tm4c1294-launchpad/include` Component (`boards/arm/tiva/tm4c1294-launchpad/include`)
+
+## Overview
+Board-level public headers (`include`) for `tm4c1294-launchpad` (`arm/tiva`). Defines board-specific pin mappings, clock frequencies, LED/button definitions, and exported prototypes across 1 header file(s).
+
+## Interface
+- `[board.h:SYSCON_RCC_XTAL]` Hardware/board configuration macros (`SYSCON_RCC_XTAL`, `XTAL_FREQUENCY`, `PIOSC_FREQUENCY`, `RTCOSC_FREQUENCY`, `LFIOSC_FREQUENCY`, `BOARD_PLL_MINT` (+44 more))
+
+## Invariants
+- None
+
+## Side Effects
+- None
+
+## Verification
+- Run: `./tools/configure.sh tm4c1294-launchpad:nsh && make`
