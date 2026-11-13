@@ -315,7 +315,7 @@ config SPINWAIT_RELAX
 	bool "Relax hint wait"
 	---help---
 		Spinlock waiters poll the lock with the architecture relax
-		hint (PAUSE on x86_64, YIELD on aarch64) and unlocking sends
+		hint (PAUSE on x86_64, YIELD on arm64, armv7-a and armv7-r) and unlocking sends
 		no wake event.  The hint reduces bus and pipeline
 		contention without sleeping, and the unlock stays a plain
 		release store.
@@ -1407,6 +1407,21 @@ config SCHED_INSTRUMENTATION_DUMP
 			void sched_note_event_ip(uint32_t tag, uintptr_t ip, uint8_t event, FAR const void *buf, size_t len);
 			void sched_note_vprintf_ip(uint32_t tag, uintptr_t ip, FAR const char *fmt, uint32_t type, va_list va) printf_like(3, 0);
 			void sched_note_printf_ip(uint32_t tag, uintptr_t ip, FAR const char *fmt, uint32_t type, ...) printf_like(3, 5);
+
+config SCHED_INSTRUMENTATION_THREADTIME
+	bool "Enable thread runtime instrumentation"
+	depends on SCHED_INSTRUMENTATION_DUMP
+	depends on SCHED_CRITMONITOR
+	default n
+	---help---
+		Enable thread runtime instrumentation.
+
+config SCHED_INSTRUMENTATION_THREAD_RUNTIME_DURATION
+	int "Record thread runtime minimum duration (us)"
+	depends on SCHED_INSTRUMENTATION_THREADTIME
+	default 0
+	---help---
+		The minimum duration of thread runtime to be recorded.
 
 config SCHED_INSTRUMENTATION_FUNCTION
 	bool "Enable function auto-tracing"

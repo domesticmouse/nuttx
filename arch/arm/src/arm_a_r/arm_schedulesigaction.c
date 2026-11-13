@@ -1,5 +1,5 @@
 /****************************************************************************
- * arch/arm/src/armv7-r/arm_schedulesigaction.c
+ * arch/arm/src/arm_a_r/arm_schedulesigaction.c
  *
  * SPDX-License-Identifier: Apache-2.0
  *
@@ -28,6 +28,7 @@
 
 #include <stdint.h>
 #include <sched.h>
+#include <assert.h>
 
 #include <nuttx/debug.h>
 #include <nuttx/irq.h>
@@ -36,6 +37,7 @@
 #include "arm.h"
 #include "sched/sched.h"
 #include "arm_internal.h"
+#include "irq/irq.h"
 
 /****************************************************************************
  * Public Functions
@@ -108,6 +110,7 @@ void up_schedule_sigaction(struct tcb_s *tcb)
    * disabled
    */
 
+  tcb->xcp.regs[REG_LR]    = 0; /* Avoid backtracing back. */
   tcb->xcp.regs[REG_PC]    = (uint32_t)arm_sigdeliver;
   tcb->xcp.regs[REG_CPSR]  = (PSR_MODE_SYS | PSR_I_BIT | PSR_F_BIT);
 #ifdef CONFIG_ARM_THUMB

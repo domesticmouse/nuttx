@@ -27,8 +27,11 @@
 #include <nuttx/debug.h>
 
 #include <string.h>
+#include <strings.h>
+#include <syslog.h>
 
 #include <nuttx/arch.h>
+#include <nuttx/fs/fs.h>
 #include <nuttx/nuttx.h>
 #include <nuttx/mutex.h>
 #include <nuttx/kmalloc.h>
@@ -58,14 +61,14 @@
 
 struct virtio_bus_s
 {
-  mutex_t lock;                /* Lock for the list */
-  struct list_node device;     /* Wait match virtio device list */
-  struct list_node driver;     /* Virtio driver list */
+  mutex_t lock;                  /* Lock for the list */
+  struct dq_queue_s device;      /* Wait match virtio device list */
+  struct dq_queue_s driver;      /* VirtIO driver list */
 };
 
 struct virtio_device_item_s
 {
-  struct list_node      node;    /* list node */
+  struct dq_entry_s     node;    /* list node */
   struct virtio_device *device;  /* Pointer to the virtio device */
   struct virtio_driver *driver;  /* Pointer to the virtio driver that
                                   * matched with current virtio device
@@ -73,19 +76,189 @@ struct virtio_device_item_s
 };
 
 /****************************************************************************
+ * Private Function Prototypes
+ ****************************************************************************/
+
+static int virtio_dev_ioctl(FAR struct file *filep, int cmd,
+                            unsigned long arg);
+
+/****************************************************************************
  * Private Data
  ****************************************************************************/
 
+static const struct file_operations g_virtio_dev_ops =
+{
+  NULL,              /* open */
+  NULL,              /* close */
+  NULL,              /* read */
+  NULL,              /* write */
+  NULL,              /* seek */
+  virtio_dev_ioctl,  /* ioctl */
+};
+
 static struct virtio_bus_s g_virtio_bus =
 {
-  NXMUTEX_INITIALIZER,
-  LIST_INITIAL_VALUE(g_virtio_bus.device),
-  LIST_INITIAL_VALUE(g_virtio_bus.driver),
+  .lock = NXMUTEX_INITIALIZER,
 };
+
+/****************************************************************************
+ * Private Functions
+ ****************************************************************************/
+
+/****************************************************************************
+ * Name: virtio_dump
+ ****************************************************************************/
+
+static void virtio_dump(FAR const char *name)
+{
+  FAR struct dq_entry_s *node;
+  int count = 0;
+  int ret;
+
+  syslog(LOG_EMERG, "VirtIO devices:\n");
+
+  name = name == NULL ? "all" : name;
+  ret = nxmutex_lock(&g_virtio_bus.lock);
+  if (ret < 0)
+    {
+      syslog(LOG_EMERG, "  Failed to acquire lock\n");
+      return;
+    }
+
+  dq_for_every(&g_virtio_bus.device, node)
+    {
+      FAR struct virtio_device_item_s *item =
+        container_of(node, struct virtio_device_item_s, node);
+      FAR struct virtio_device *vdev = item->device;
+      FAR const char *dev_name;
+      unsigned int i;
+
+      dev_name = virtio_dev_name(vdev->id.device);
+      dev_name = dev_name == NULL ? "unknown" : dev_name;
+
+      /* Apply type filter if specified, "all" means no filter */
+
+      if (strcasecmp(name, "all") != 0 && strcasecmp(dev_name, name) != 0)
+        {
+          continue;
+        }
+
+      count++;
+
+      syslog(LOG_EMERG, "  [%s] id=%" PRIu32 " vdev=%p driver=%p priv=%p\n",
+             dev_name, vdev->id.device, vdev, item->driver, vdev->priv);
+
+      /* Call driver-specific dump if available */
+
+      if (item->driver && item->driver->dump)
+        {
+          item->driver->dump(vdev);
+        }
+
+      /* Dump virtqueue information */
+
+      for (i = 0; i < vdev->vrings_num; i++)
+        {
+          FAR struct virtio_vring_info *vinfo = &vdev->vrings_info[i];
+
+          virtqueue_dump(vinfo->vq);
+        }
+    }
+
+  if (count == 0)
+    {
+      syslog(LOG_EMERG, "  No devices of type '%s' found\n", name);
+    }
+
+  nxmutex_unlock(&g_virtio_bus.lock);
+}
+
+/****************************************************************************
+ * Name: virtio_dev_ioctl
+ ****************************************************************************/
+
+static int virtio_dev_ioctl(FAR struct file *filep, int cmd,
+                            unsigned long arg)
+{
+  int ret = -ENOTTY;
+
+  switch (cmd)
+    {
+      case VIRTIOIOC_DUMP:
+        virtio_dump((FAR const char *)(uintptr_t)arg);
+        ret = OK;
+        break;
+
+      default:
+        break;
+    }
+
+  return ret;
+}
 
 /****************************************************************************
  * Public Functions
  ****************************************************************************/
+
+/****************************************************************************
+ * Name: virtio_get_next_buffer
+ ****************************************************************************/
+
+FAR void *virtio_get_next_buffer(FAR struct virtqueue *vq, uint16_t idx,
+                                 FAR uint16_t *next_idx,
+                                 FAR uint32_t *next_len)
+{
+  uint16_t next;
+
+  return virtqueue_get_next_avail_buffer(vq, idx,
+                                         next_idx ? next_idx : &next,
+                                         next_len);
+}
+
+/****************************************************************************
+ * Name: virtio_get_buffers
+ ****************************************************************************/
+
+ssize_t virtio_get_buffers(FAR struct virtqueue *vq,
+                           FAR struct virtqueue_buf *vb, size_t vbcnt)
+{
+  FAR void *buf;
+  uint16_t head;
+  uint16_t idx;
+  uint32_t len;
+  size_t i;
+
+  DEBUGASSERT(vb != NULL && vbcnt >= 1);
+
+  buf = virtqueue_get_buffer(vq, &len, &idx);
+  if (buf == NULL)
+    {
+      return -ENOMEM;
+    }
+
+  vb[0].buf = buf;
+  vb[0].len = len;
+
+  head = vq->vq_ring.used->ring[idx].id;
+  for (i = 1, idx = head; ; i++)
+    {
+      buf = virtio_get_next_buffer(vq, idx, &idx, &len);
+      if (buf == NULL)
+        {
+          break;
+        }
+      else if (i >= vbcnt)
+        {
+          vrterr("vbcnt %zu is not enough\n", vbcnt);
+          return -EINVAL;
+        }
+
+      vb[i].buf = buf;
+      vb[i].len = len;
+    }
+
+  return i;
+}
 
 /****************************************************************************
  * Name: virtio_register_drivers
@@ -100,6 +273,14 @@ void virtio_register_drivers(void)
   if (ret < 0)
     {
       vrterr("metal_init failed, ret=%d\n", ret);
+    }
+
+  /* Register virtio character device */
+
+  ret = register_driver("/dev/virtio", &g_virtio_dev_ops, 0200, NULL);
+  if (ret < 0)
+    {
+      vrterr("register_driver /dev/virtio failed, ret=%d\n", ret);
     }
 
 #ifdef CONFIG_DRIVERS_VIRTIO_BLK
@@ -183,7 +364,7 @@ void virtio_register_drivers(void)
 
 int virtio_register_driver(FAR struct virtio_driver *driver)
 {
-  FAR struct list_node *node;
+  FAR struct dq_entry_s *node;
   int ret;
 
   DEBUGASSERT(driver != NULL && driver->probe != NULL &&
@@ -197,11 +378,11 @@ int virtio_register_driver(FAR struct virtio_driver *driver)
 
   /* Add the driver to the virtio_bus driver list */
 
-  list_add_tail(&g_virtio_bus.driver, &driver->node);
+  dq_addlast(&driver->node, &g_virtio_bus.driver);
 
   /* Match all the devices has registered in the virtio_bus */
 
-  list_for_every(&g_virtio_bus.device, node)
+  dq_for_every(&g_virtio_bus.device, node)
     {
       FAR struct virtio_device_item_s *item =
         container_of(node, struct virtio_device_item_s, node);
@@ -232,7 +413,7 @@ int virtio_register_driver(FAR struct virtio_driver *driver)
 
 int virtio_unregister_driver(FAR struct virtio_driver *driver)
 {
-  FAR struct list_node *node;
+  FAR struct dq_entry_s *node;
   int ret;
 
   DEBUGASSERT(driver != NULL);
@@ -245,7 +426,7 @@ int virtio_unregister_driver(FAR struct virtio_driver *driver)
 
   /* Find all the devices matched with driver in device list */
 
-  list_for_every(&g_virtio_bus.device, node)
+  dq_for_every(&g_virtio_bus.device, node)
     {
       FAR struct virtio_device_item_s *item =
         container_of(node, struct virtio_device_item_s, node);
@@ -263,7 +444,7 @@ int virtio_unregister_driver(FAR struct virtio_driver *driver)
 
   /* Remove the driver from the driver list */
 
-  list_delete(&driver->node);
+  dq_rem(&driver->node, &g_virtio_bus.driver);
 
   nxmutex_unlock(&g_virtio_bus.lock);
   return ret;
@@ -276,7 +457,7 @@ int virtio_unregister_driver(FAR struct virtio_driver *driver)
 int virtio_register_device(FAR struct virtio_device *device)
 {
   FAR struct virtio_device_item_s *item;
-  FAR struct list_node *node;
+  FAR struct dq_entry_s *node;
   int ret;
 
   item = kmm_zalloc(sizeof(*item));
@@ -296,11 +477,11 @@ int virtio_register_device(FAR struct virtio_device *device)
 
   /* Add the device to the virtio_bus device list */
 
-  list_add_tail(&g_virtio_bus.device, &item->node);
+  dq_addlast(&item->node, &g_virtio_bus.device);
 
   /* Match the driver has registered in the virtio_bus */
 
-  list_for_every(&g_virtio_bus.driver, node)
+  dq_for_every(&g_virtio_bus.driver, node)
     {
       FAR struct virtio_driver *driver =
         container_of(node, struct virtio_driver, node);
@@ -331,7 +512,7 @@ int virtio_register_device(FAR struct virtio_device *device)
 
 int virtio_unregister_device(FAR struct virtio_device *device)
 {
-  FAR struct list_node *node;
+  FAR struct dq_entry_s *node;
   int ret;
 
   ret = nxmutex_lock(&g_virtio_bus.lock);
@@ -342,7 +523,7 @@ int virtio_unregister_device(FAR struct virtio_device *device)
 
   /* Find the device in device list */
 
-  list_for_every(&g_virtio_bus.device, node)
+  dq_for_every(&g_virtio_bus.device, node)
     {
       FAR struct virtio_device_item_s *item =
         container_of(node, struct virtio_device_item_s, node);
@@ -358,7 +539,7 @@ int virtio_unregister_device(FAR struct virtio_device *device)
 
           /* Remove the device from the device list and free memory */
 
-          list_delete(&item->node);
+          dq_rem(&item->node, &g_virtio_bus.device);
           kmm_free(item);
           break;
         }

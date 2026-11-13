@@ -1127,6 +1127,13 @@ static int inet_listen(FAR struct socket *psock, int backlog)
 #ifdef NET_TCP_HAVE_STACK
   conn = psock->s_conn;
 
+  /* A connected socket, or one that connects, cannot listen (as Linux) */
+
+  if (conn->tcpstateflags != TCP_ALLOCATED)
+    {
+      return -EINVAL;
+    }
+
   if (conn->lport == 0)
     {
 #ifdef CONFIG_NET_IPv4
@@ -2182,11 +2189,28 @@ static ssize_t inet_sendfile(FAR struct socket *psock,
 static ssize_t inet_recvmsg(FAR struct socket *psock,
                             FAR struct msghdr *msg, int flags)
 {
+  FAR const struct iovec *iov;
+  FAR const struct iovec *end;
+  size_t len = 0;
   ssize_t ret;
 
   if (msg->msg_iovlen == 0)
     {
       return -EMSGSIZE;
+    }
+
+  end = &msg->msg_iov[msg->msg_iovlen];
+  for (iov = msg->msg_iov; iov != end; iov++)
+    {
+      /* The sum of the iov_len values must fit in an ssize_t */
+
+      if (iov->iov_len > SSIZE_MAX - len)
+        {
+          nwarn("WARNING: The sum of the iov_len values is too large\n");
+          return -EINVAL;
+        }
+
+      len += iov->iov_len;
     }
 
   /* If a 'from' address has been provided, verify that it is large

@@ -1,5 +1,5 @@
 /****************************************************************************
- * arch/arm/src/stm32h5/hardware/stm32_i2c.h
+ * include/nuttx/serial/netdev_console.h
  *
  * SPDX-License-Identifier: Apache-2.0
  *
@@ -20,23 +20,28 @@
  *
  ****************************************************************************/
 
-#ifndef __ARCH_ARM_SRC_STM32H5_HARDWARE_STM32_I2C_H
-#define __ARCH_ARM_SRC_STM32H5_HARDWARE_STM32_I2C_H
+#ifndef __INCLUDE_NUTTX_SERIAL_NETDEV_CONSOLE_H
+#define __INCLUDE_NUTTX_SERIAL_NETDEV_CONSOLE_H
 
 /****************************************************************************
  * Included Files
  ****************************************************************************/
 
 #include <nuttx/config.h>
-#include "chip.h"
 
-#if defined(CONFIG_STM32_STM32H50XXX) || \
-    defined(CONFIG_STM32_STM32H52XXX) || \
-    defined(CONFIG_STM32_STM32H53XXX) || \
-    defined(CONFIG_STM32_STM32H56XXX) || \
-    defined(CONFIG_STM32_STM32H57XXX)
-#  include "hardware/stm32h5xxx_i2c.h"
-#else
-#  error "Unsupported STM32 H5 I2C"
+/****************************************************************************
+ * Public Function Prototypes
+ ****************************************************************************/
+
+#ifdef __cplusplus
+extern "C"
+{
 #endif
-#endif /* __ARCH_ARM_SRC_STM32H5_HARDWARE_STM32_I2C_H */
+
+int netdev_console_init(void);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif /* __INCLUDE_NUTTX_SERIAL_NETDEV_CONSOLE_H */

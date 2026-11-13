@@ -34,6 +34,17 @@ Related Header Files
 ``include/nuttx/audio/audio.h`` - Top level include file defining the audio interface
 ``include/nuttx/audio/vs1053.h`` - Specific driver initialization prototypes
 
+Driver Registration
+===================
+
+A lower-half driver is bound to an upper half with ``audio_register()``, which
+creates the device node (``/dev/audio/<name>`` unless
+``CONFIG_AUDIO_CUSTOM_DEV_PATH`` selects another location).
+``audio_unregister()`` removes the node and frees the upper half again, for a
+driver whose device can go away at run time.  It fails with ``-EBUSY`` while
+the device is still open.  The caller must also make sure that no ``open()``
+of the device is in progress.
+
 Playback and Capture Flow
 =========================
 
@@ -142,6 +153,12 @@ expressed in bytes; the format is a property of the stream, expressed as a rate.
 Their ratio only determines how much audio one buffer represents, and the audio
 subsystem does not constrain it.
 
+``struct ap_buffer_s`` has a ``userdata`` pointer that the audio subsystem
+never reads or writes, and that ``apb_alloc()`` clears.  An application that
+copies its own data blocks into apbs can store the block there before
+``AUDIOIOC_ENQUEUEBUFFER``, and get it back from the apb that
+``AUDIO_MSG_DEQUEUE`` returns, instead of keeping its own apb-to-block table.
+
 .. note::
    ``AUDIOIOC_GETBUFFERINFO`` is a query, but in the upper half it also records
    the reported buffer count for use as the shared ring depth.  A lower half
@@ -248,6 +265,17 @@ Status and Notification
 * ``AUDIOIOC_REGISTERMQ`` / ``AUDIOIOC_UNREGISTERMQ``
   Register, respectively remove, the message queue on which the driver reports
   ``AUDIO_MSG_DEQUEUE``, ``AUDIO_MSG_COMPLETE`` and error events.
+
+Debugging
+---------
+
+* ``AUDIOIOC_DUMP``
+  Record the data passing through the device.  The argument is a file path;
+  the upper half creates the file and writes every buffer the lower half
+  returns into it: the samples a playback buffer carried, or the samples a
+  capture buffer received.  A ``NULL`` argument stops the recording.  Buffers
+  returned in interrupt context are not recorded, since writing a file may
+  block.
 
 Multiple Applications
 =====================
