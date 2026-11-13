@@ -9,6 +9,7 @@ Implements the NuttX GPIO upper-half VFS character driver (`/dev/gpio*`), the ge
 - `ioe_rpmsg.c:ioe_rpmsg_server_initialize`, `ioe_rpmsg.c:ioe_rpmsg_client_initialize`, `ioe_dummy.c:ioe_dummy_initialize`, `skeleton.c:skel_initialize` - RPMsg remote I/O expander proxy, simulated dummy expander, and template driver.
 - `aw9523b.c:aw9523b_initialize`, `ch422g.c:ch422g_initialize`, `mcp23x08.c:mcp23x08_initialize`, `mcp23x17.c:mcp23x17_initialize`, `pca9538.c:pca9538_initialize`, `pca9555.c:pca9555_initialize`, `pca9557.c:pca9557_initialize`, `pcf8574.c:pcf8574_initialize`, `pcf8575.c:pcf8575_initialize`, `pi4ioe5v6408.c:pi4ioe5v6408_initialize`, `sx1509.c:sx1509_initialize`, `sx1509.c:sx1509_leds_initialize`, `tca64xx.c:tca64_initialize` - Initializes I2C I/O expander devices.
 - `icjx.c:icjx_initialize`, `iso1h812g.c:iso1h812g_initialize`, `iso1i813t.c:iso1i813t_initialize` - Initializes SPI digital input/output expander devices.
+- `pl061.c:pl061_ioe_initialize` - Initializes ARM PrimeCell PL061 memory-mapped GPIO expander instances.
 
 ## Invariants
 - `gpio.c:gpio_pin_register` and `gpio.c:gpio_pin_register_byname` assert `dev != NULL && dev->gp_ops != NULL`.

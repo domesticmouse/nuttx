@@ -13,6 +13,7 @@ Top-level host build, configuration, code generation, style verification, debugg
 - `coredump.py:decompress`, `coredump.py:main`, `gdbserver.py:GDBServer`, `jlink-nuttx.c` - LZF/hex/base64 core dump decoder and log/coredump/rawbin-backed GDB RSP server (`reg_table`).
 - `nxstyle.c:main`, `checkpatch.sh:usage`, `checkkconfig.py`, `detab.c:main`, `rmcr.c:main`, `lowhex.c:main`, `convert-comments.c:main` - NuttX C coding style validator (`g_section_info`), patch/commit linter, Kconfig checker, and source formatting utilities.
 - `testbuild.sh:showusage`, `mkexport.sh`, `zipme.sh`, `checkrelease.sh`, `doreleasenotes.py` - Multi-configuration build/test orchestrator, SDK export packager (`nuttx-export-*.tar.gz`), and release verification tools.
+- `isotp_pty.py:main` - ISO-TP (`CAN_ISOTP`) socket to pseudo-terminal (`PTY`) host bridge utility.
 - [./ameba/README.md](./ameba/README.md) - Realtek Ameba KM0/KM4 flash image packaging utility (`afimg`).
 - [./bcm2711/README.md](./bcm2711/README.md) - Broadcom BCM2711 (Raspberry Pi 4B) bootable SD card image creator (`mkraspboot`).
 - [./ci/README.md](./ci/README.md) - Continuous Integration (`cibuild.sh`), Docker/host platform provisioning, and CMake/Make parity verification scripts.

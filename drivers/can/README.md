@@ -6,7 +6,6 @@ Implements the NuttX Controller Area Network (CAN) upper-half character driver, 
 ## Interface
 - `can.c:can_register` - Registers a CAN character device node wrapping a `can_dev_s` lower-half instance.
 - `can.c:can_receive`, `can.c:can_txdone`, `can.c:can_txready` - Upper-half callbacks invoked by lower-half interrupt handlers to enqueue received CAN frames and advance TX state.
-- `can_common.c:can_bytes2dlc`, `can_common.c:can_dlc2bytes` - Converts between payload byte lengths and CAN / CAN FD Data Length Codes (DLC).
 - `can_sender.c:can_sender_init`, `can_sender.c:can_add_sendnode`, `can_sender.c:can_get_msg`, `can_sender.c:can_revert_msg`, `can_sender.c:can_send_done`, `can_sender.c:can_txneed_cancel`, `can_sender.c:can_cancel_mbmsg` - Manages TX FIFO/priority queues (`tx_pendq`, `tx_sendingq`, `tx_freeq`) and hardware mailbox cancellation.
 - `mcp2515.c:mcp2515_instantiate`, `mcp2515.c:mcp2515_initialize`, `mcp2515.c:mcp2515_can_s` - Instantiates and binds the Microchip MCP2515 SPI CAN controller.
 - `sja1000.c:sja1000_instantiate`, `kvaser_pci.c:pci_kvaser_init`, `ctucanfd_pci.c:pci_ctucanfd_init`, `ctucanfd.h:ctucanfd_frame_s` - Initializes SJA1000, Kvaser PCI, and CTU CAN FD PCI CAN controllers.

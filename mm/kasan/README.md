@@ -1,7 +1,7 @@
 # kasan
 
 ## Overview
-Kernel AddressSanitizer (KASan) runtime and memory error detector (`CONFIG_MM_KASAN`). Implements compiler instrumentation hooks (`__asan_load*`, `__asan_store*`, `__asan_report_*`), softwarewatchpoints (`kasan_debugpoint`), global variable redzone checking (`global.c`), and pluggable shadow/tag backends: bit-packed shadow memory (`generic.c`), software pointer tagging (`sw_tags.c`), and hardware memory tagging (`hw_tags.c`).
+Kernel AddressSanitizer (KASan) runtime and memory error detector (`CONFIG_MM_KASAN`). Implements compiler instrumentation hooks (`__asan_load*`, `__asan_store*`, `__asan_report_*`), softwarewatchpoints (`kasan_debugpoint`), global variable redzone checking (`global.c`), and pluggable shadow/tag backends: bit-packed shadow memory (`generic.c`), software pointer tagging (`sw_tags.c`), hardware memory tagging (`hw_tags.c`), and host AddressSanitizer integration (`sim_asan.c`, `CONFIG_MM_KASAN_SIM`).
 
 ## Interface
 - `[hook.c:kasan_start]`, `[hook.c:kasan_stop]`, `[hook.c:kasan_debugpoint]`
@@ -9,6 +9,7 @@ Kernel AddressSanitizer (KASan) runtime and memory error detector (`CONFIG_MM_KA
 - `[generic.c:kasan_register]`, `[generic.c:kasan_unregister]`, `[generic.c:kasan_poison]`, `[generic.c:kasan_unpoison]`, `[generic.c:kasan_bypass]`, `[generic.c:kasan_get_tag]`, `[generic.c:kasan_set_tag]`, `[generic.c:kasan_clear_tag]`
 - `[sw_tags.c:kasan_register]`, `[sw_tags.c:kasan_unregister]`, `[sw_tags.c:kasan_poison]`, `[sw_tags.c:kasan_unpoison]`, `[sw_tags.c:kasan_bypass]`, `[sw_tags.c:kasan_get_tag]`, `[sw_tags.c:kasan_set_tag]`, `[sw_tags.c:kasan_clear_tag]`
 - `[hw_tags.c:kasan_register]`, `[hw_tags.c:kasan_unregister]`, `[hw_tags.c:kasan_poison]`, `[hw_tags.c:kasan_unpoison]`, `[hw_tags.c:kasan_bypass]`, `[hw_tags.c:kasan_get_tag]`, `[hw_tags.c:kasan_set_tag]`, `[hw_tags.c:kasan_clear_tag]`
+- `[sim_asan.c:kasan_register]`, `[sim_asan.c:kasan_unregister]`, `[sim_asan.c:kasan_poison]`, `[sim_asan.c:kasan_unpoison]`, `[sim_asan.c:kasan_bypass]`, `[sim_asan.c:kasan_get_tag]`, `[sim_asan.c:kasan_set_tag]`, `[sim_asan.c:kasan_clear_tag]`
 - `[global.c:g_global_region]`
 
 ## Invariants

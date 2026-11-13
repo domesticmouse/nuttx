@@ -1,7 +1,7 @@
 # armv7-a (`nuttx/arch/arm/src/armv7-a`)
 
 ## Overview
-Hardware abstraction and architecture package for `armv7-a` (ARMv7-A Configuration Options; L2 Cache Configuration) under `nuttx/arch/arm/src/armv7-a`, providing 15 header file(s) and 42 source file(s) (including `addrenv.h`, `arm.h`, `arm_cpu_psci.h`, `arm_timer.h`).
+Hardware abstraction and architecture package for `armv7-a` (ARMv7-A Configuration Options; L2 Cache Configuration) under `nuttx/arch/arm/src/armv7-a`, providing 15 header file(s) and 40 source file(s) (including `addrenv.h`, `arm.h`, `arm_cpu_psci.h`, `arm_timer.h`).
 
 ## Interface
 - `[addrenv.h:arm_addrenv_create_region]`

@@ -1,10 +1,10 @@
 # stm32h5 (`nuttx/arch/arm/src/stm32h5`)
 
 ## Overview
-Hardware abstraction and architecture package for `stm32h5` (STM32H5 Configuration Options; STM32H5 OTP Options) under `nuttx/arch/arm/src/stm32h5`, providing 24 header file(s) and 28 source file(s) (including `chip.h`, `stm32.h`, `stm32_adc.h`, `stm32_capture.h`).
+Hardware abstraction and architecture package for `stm32h5` (STM32H5 Configuration Options; STM32H5 OTP Options) under `nuttx/arch/arm/src/stm32h5`, providing 23 header file(s) and 27 source file(s) (including `chip.h`, `stm32.h`, `stm32_adc.h`, `stm32_capture.h`).
 
 ## Subdirectories & Boundaries
-- `hardware`: [./hardware/README.md](./hardware/README.md) - Hardware abstraction and architecture package for `hardware` under `nuttx/arch/arm/src/stm32h5/hardware`, providing 29 header file(s) and 0 source file(s) (including `stm32_adc.h`, `stm32_crc.h`, `stm32_crs.h`, `stm32_dac.h`).
+- `hardware`: [./hardware/README.md](./hardware/README.md) - Hardware abstraction and architecture package for `hardware` under `nuttx/arch/arm/src/stm32h5/hardware`, providing 27 header file(s) and 0 source file(s) (including `stm32_adc.h`, `stm32_crc.h`, `stm32_crs.h`, `stm32_dac.h`).
 
 ## Interface
 - `[chip.h:ARMV8M_PERIPHERAL_INTERRUPTS]`
@@ -47,7 +47,6 @@ Hardware abstraction and architecture package for `stm32h5` (STM32H5 Configurati
 - `[stm32_adc.c:DEBUGASSERT]` Enforces runtime precondition and state assertions via `DEBUGASSERT`
 - `[stm32_adc.c:enter_critical_section]` Requires critical section serialization (`enter_critical_section` / `leave_critical_section`) across state and register updates
 - `[stm32_adc.c:#error]` Compile-time configuration constraint: board.h must define STM32_ADC_CLK_FREQUENCY
-- `[stm32_capture.c:DEBUGASSERT]` Enforces runtime precondition and state assertions via `DEBUGASSERT`
 - `[stm32_capture_lowerhalf.c:enter_critical_section]` Requires critical section serialization (`enter_critical_section` / `leave_critical_section`) across state and register updates
 - `[stm32_dac.c:enter_critical_section]` Requires critical section serialization (`enter_critical_section` / `leave_critical_section`) across state and register updates
 - `[stm32_dac.c:#error]` Compile-time configuration constraint: DAC1 must be enabled
@@ -63,9 +62,6 @@ Hardware abstraction and architecture package for `stm32h5` (STM32H5 Configurati
 - `[stm32_adc.c:irq_attach]` Registers hardware interrupt service routines with the kernel IRQ dispatcher (`irq_attach`)
 - `[stm32_adc.c:up_enable_irq]` Enables hardware interrupt lines in the interrupt controller (`up_enable_irq`)
 - `[stm32_adc.c:up_disable_irq]` Disables hardware interrupt lines in the interrupt controller (`up_disable_irq`)
-- `[stm32_capture.c:putreg32]` Mutates 32-bit memory-mapped I/O (MMIO) hardware registers (`putreg32`)
-- `[stm32_capture.c:modifyreg32]` Performs read-modify-write mutations on 32-bit MMIO hardware registers (`modifyreg32`)
-- `[stm32_capture.c:getreg32]` Reads volatile 32-bit memory-mapped hardware status/control registers (`getreg32`)
 
 ## Verification
 - Run: `make test`

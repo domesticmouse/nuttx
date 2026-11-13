@@ -1,7 +1,7 @@
 # NuttX Networking Subsystem (`net`)
 
 ## Overview
-The `net` directory contains the NuttX kernel networking stack. It provides the top-level subsystem initialization entry point (`net_initialize`), the BSD/POSIX and internal `psock_*` socket layer (`socket`), network device registration and upper-layer callback dispatching (`netdev`, `devif`), L2/L3/L4 protocol implementations (ARP, IPv4/IPv6, ICMP, ICMPv6, IGMP, MLD, Neighbor Discovery, TCP, UDP, 6LoWPAN, SocketCAN, Bluetooth, IEEE 802.15.4, Raw Packet, Local/Unix Domain, Netlink, RPMsg, and Userspace Sockets), routing tables (`route`), packet fragmentation (`ipfrag`), cross-interface packet forwarding (`netforward`), NAT (`nat`), packet filtering and `iptables` (`ipfilter`, `netfilter`), `/proc/net` observability (`procfs`), interrupt-free polling I/O (`netpoll`), and core locking/buffer/checksum utilities (`utils`).
+The `net` directory contains the NuttX kernel networking stack. It provides the top-level subsystem initialization entry point (`net_initialize`), the BSD/POSIX and internal `psock_*` socket layer (`socket`), network device registration and upper-layer callback dispatching (`netdev`, `devif`), L2/L3/L4 protocol implementations (ARP, IPv4/IPv6, ICMP, ICMPv6, IGMP, MLD, Neighbor Discovery, TCP, UDP, 6LoWPAN, SocketCAN, Bluetooth, IEEE 802.15.4, Raw Packet, Local/Unix Domain, Netlink, RPMsg, Userspace Sockets, and `AF_VSOCK` Virtual Sockets), routing tables (`route`), packet fragmentation (`ipfrag`), cross-interface packet forwarding (`netforward`), NAT (`nat`), packet filtering and `iptables` (`ipfilter`, `netfilter`), `/proc/net` observability (`procfs`), interrupt-free polling I/O (`netpoll`), and core locking/buffer/checksum utilities (`utils`).
 
 ## Interface
 - `[net_initialize.c:net_initialize]` - Top-level initialization entry point called once from `nx_start()` during OS power-up to initialize enabled networking subsystems (`bluetooth_initialize`, `ieee802154_initialize`, `net_init_route`, `sixlowpan_initialize`, `usrsock_initialize`).
@@ -35,6 +35,7 @@ The `net` directory contains the NuttX kernel networking stack. It provides the 
 - [./udp/README.md](./udp/README.md) - User Datagram Protocol (UDP) connection management, read-ahead/write-buffer queuing, and socket I/O.
 - [./usrsock/README.md](./usrsock/README.md) - Userspace socket (`usrsock`) kernel proxy forwarding socket operations over `/dev/usrsock` to a userspace daemon.
 - [./utils/README.md](./utils/README.md) - Networking utilities including `net_lock`, `conn_dev_lock`, `net_bufpool_s`, Internet checksums, `cmsg` helpers, mask/prefix conversions, and `net_snoop`.
+- [./vsock/README.md](./vsock/README.md) - Virtual Socket (`AF_VSOCK`) protocol family supporting VirtIO, Vhost, and local loopback transports for guest/host VM communication.
 
 ## Invariants
 - `[net_initialize.c:net_initialize]` must be called once during OS bring-up before any network device driver is registered, at a stage where base OS semaphore/mutex facilities are initialized.

@@ -1,7 +1,7 @@
 # armv7-r (`nuttx/arch/arm/src/armv7-r`)
 
 ## Overview
-Hardware abstraction and architecture package for `armv7-r` (ARMv7-R Configuration Options; L2 Cache Configuration) under `nuttx/arch/arm/src/armv7-r`, providing 11 header file(s) and 23 source file(s) (including `arm.h`, `arm_timer.h`, `cp15_cacheops.h`, `gic.h`).
+Hardware abstraction and architecture package for `armv7-r` (ARMv7-R Configuration Options; L2 Cache Configuration) under `nuttx/arch/arm/src/armv7-r`, providing 11 header file(s) and 21 source file(s) (including `arm.h`, `arm_timer.h`, `cp15_cacheops.h`, `gic.h`).
 
 ## Interface
 - `[arm.h:arm_boot]`
@@ -47,7 +47,6 @@ Hardware abstraction and architecture package for `armv7-r` (ARMv7-R Configurati
 - `[arm_l2cc_pl310.c:spin_lock_irqsave]` Enforces SMP-safe spinlock and interrupt-masking serialization (`spin_lock_irqsave`)
 - `[arm_l2cc_pl310.c:#error]` Compile-time configuration constraint: Number of ways not selected
 - `[arm_mpu.c:DEBUGASSERT]` Enforces runtime precondition and state assertions via `DEBUGASSERT`
-- `[arm_sigdeliver.c:DEBUGASSERT]` Enforces runtime precondition and state assertions via `DEBUGASSERT`
 
 ## Side Effects
 - `[gic.h:putreg32]` Writes 32-bit values directly to memory-mapped I/O (MMIO) peripheral registers

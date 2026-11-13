@@ -1,7 +1,7 @@
 # NuttX VirtIO Device & Driver Framework (`include/nuttx/virtio`)
 
 ## Overview
-Provides the NuttX VirtIO device, driver, and virtqueue management interfaces built on OpenAMP (`virtio.h`, `virtio-config.h`), MMIO and PCI transport bindings (`virtio-mmio.h`, `virtio-pci.h`), and standard VirtIO device protocol/configuration headers for block (`virtio-blk.h`), CAN (`virtio-can.h`), I2C (`virtio-i2c.h`), Replay Protected Memory Block (`virtio-rpmb.h`), and serial (`virtio-serial.h`) devices.
+Provides the NuttX VirtIO device, driver, and virtqueue management interfaces built on OpenAMP (`virtio.h`, `virtio-config.h`), MMIO and PCI transport bindings (`virtio-mmio.h`, `virtio-pci.h`), and standard VirtIO device protocol/configuration headers for block (`virtio-blk.h`), CAN (`virtio-can.h`), I2C (`virtio-i2c.h`), Replay Protected Memory Block (`virtio-rpmb.h`), serial (`virtio-serial.h`), and vsock (`virtio-vsock.h`) devices.
 
 ## Interface
 - `virtio.h:virtio_driver`, `virtio.h:virtio_register_driver`, `virtio.h:virtio_unregister_driver`, `virtio.h:virtio_register_device`, `virtio.h:virtio_unregister_device`, `virtio.h:virtio_register_drivers`, `virtio.h:virtio_alloc_buf`, `virtio.h:virtio_free_buf` - VirtIO driver registration, device discovery, DMA buffer allocation, and spinlock-synchronized `virtqueue_*_lock` wrappers (`virtqueue_add_buffer_lock`, `virtqueue_get_buffer_lock`, `virtqueue_kick_lock`).
@@ -11,6 +11,7 @@ Provides the NuttX VirtIO device, driver, and virtqueue management interfaces bu
 - `virtio-can.h:virtio_can_config_s`, `virtio-can.h:virtio_can_tx_out_s`, `virtio-can.h:virtio_can_rx_s`, `virtio-can.h:virtio_can_control_out_s` - VirtIO CAN frame and controller state structures.
 - `virtio-i2c.h:virtio_i2c_out_hdr_s`, `virtio-i2c.h:virtio_i2c_in_hdr_s`, `virtio-i2c.h:vhost_i2c_config_s` - VirtIO I2C transaction headers.
 - `virtio-rpmb.h:virtio_rpmb_frame`, `virtio-rpmb.h:virtio_rpmb_config_s`, `virtio-serial.h:virtio_serial_config_s`, `virtio-serial.h:vhost_serial_config_s` - VirtIO RPMB frame and VirtIO console/serial configuration structures.
+- `virtio-vsock.h:virtio_vsock_config_s`, `virtio-vsock.h:VIRTIO_VSOCK_F_STREAM`, `virtio-vsock.h:VIRTIO_VSOCK_F_SEQPACKET` - VirtIO VSOCK device configuration structure and feature bits.
 
 ## Invariants
 - Concurrent accesses to a shared `struct virtqueue` must be serialized using the `virtio.h:virtqueue_*_lock` inline helpers passing the associated `spinlock_t *lock` unless external mutual exclusion is held.

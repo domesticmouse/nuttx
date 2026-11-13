@@ -17,6 +17,7 @@ Implements the NuttX upper-half serial/UART character driver (`serial.c`) with i
   - `[uart_xlnx_ps.c:xlnxps_earlyserialinit]`, `[uart_xlnx_ps.c:xlnxps_serialinit]` - Xilinx Zynq/ZynqMP Processing System UART driver.
   - `[uart_bth4.c:uart_bth4_register]`, `[uart_bth5.c:uart_bth5_register]` - Bluetooth H4 and H5 (3-wire) UART virtual serial drivers.
   - `[uart_hostfs.c:uart_hostfs_init]`, `[uart_ram.c:uart_ram_register]`, `[uart_ram.c:ram_serialinit]`, `[uart_rpmsg.c:uart_rpmsg_init]`, `[uart_rpmsg_raw.c:uart_rpmsg_raw_init]` - HostFS, shared-memory RAM, and RPMSG inter-processor UART drivers.
+  - `[netdev_console.c:netdev_console_init]` - Network-device remote console UART driver.
 
 ## Invariants
 - `[serial.c:uart_register]` requires valid `uart_dev_s` buffers and operations; open/close/I/O operations assert `DEBUGASSERT(inode->i_private != NULL)`.

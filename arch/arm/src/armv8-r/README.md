@@ -1,7 +1,7 @@
 # armv8-r (`nuttx/arch/arm/src/armv8-r`)
 
 ## Overview
-Hardware abstraction and architecture package for `armv8-r` (ARMv8-R Configuration Options; L2 Cache Configuration) under `nuttx/arch/arm/src/armv8-r`, providing 7 header file(s) and 18 source file(s) (including `arm.h`, `arm_gic.h`, `arm_timer.h`, `cp15_cacheops.h`).
+Hardware abstraction and architecture package for `armv8-r` (ARMv8-R Configuration Options; L2 Cache Configuration) under `nuttx/arch/arm/src/armv8-r`, providing 7 header file(s) and 16 source file(s) (including `arm.h`, `arm_gic.h`, `arm_timer.h`, `cp15_cacheops.h`).
 
 ## Interface
 - `[arm.h:arm_boot]`
@@ -46,8 +46,6 @@ Hardware abstraction and architecture package for `armv8-r` (ARMv8-R Configurati
 - `[arm_l2cc_pl310.c:DEBUGASSERT]` Enforces runtime precondition and state assertions via `DEBUGASSERT`
 - `[arm_l2cc_pl310.c:spin_lock_irqsave]` Enforces SMP-safe spinlock and interrupt-masking serialization (`spin_lock_irqsave`)
 - `[arm_l2cc_pl310.c:#error]` Compile-time configuration constraint: Number of ways not selected
-- `[arm_sigdeliver.c:DEBUGASSERT]` Enforces runtime precondition and state assertions via `DEBUGASSERT`
-- `[arm_sigdeliver.c:enter_critical_section]` Requires critical section serialization (`enter_critical_section` / `leave_critical_section`) across state and register updates
 
 ## Side Effects
 - `[arm_cache.c:up_clean_dcache]` Flushes CPU data cache lines to main memory (`up_clean_dcache`)

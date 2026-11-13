@@ -1,7 +1,7 @@
 # arm (`nuttx/arch/arm/src/arm`)
 
 ## Overview
-Hardware abstraction and architecture package for `arm` (ARM Configuration Options) under `nuttx/arch/arm/src/arm`, providing 2 header file(s) and 13 source file(s) (including `arm.h`, `pg_macros.h`, `arm_allocpage.c`, `arm_checkmapping.c`).
+Hardware abstraction and architecture package for `arm` (ARM Configuration Options) under `nuttx/arch/arm/src/arm`, providing 2 header file(s) and 11 source file(s) (including `arm.h`, `pg_macros.h`, `arm_allocpage.c`, `arm_checkmapping.c`).
 
 ## Interface
 - `[arm.h:PSR_MODE_MASK]`
@@ -41,8 +41,6 @@ Hardware abstraction and architecture package for `arm` (ARM Configuration Optio
 - `[arm_checkmapping.c:DEBUGASSERT]` Enforces runtime precondition and state assertions via `DEBUGASSERT`
 - `[arm_doirq.c:DEBUGASSERT]` Enforces runtime precondition and state assertions via `DEBUGASSERT`
 - `[arm_doirq.c:PANIC]` Halts execution via kernel `PANIC` on unrecoverable hardware or state invariant violation
-- `[arm_sigdeliver.c:DEBUGASSERT]` Enforces runtime precondition and state assertions via `DEBUGASSERT`
-- `[arm_sigdeliver.c:up_irq_save]` Preserves local interrupt mask state across atomic hardware operations (`up_irq_save` / `up_irq_restore`)
 - `[arm_syscall.c:DEBUGASSERT]` Enforces runtime precondition and state assertions via `DEBUGASSERT`
 - `[arm_syscall.c:PANIC]` Halts execution via kernel `PANIC` on unrecoverable hardware or state invariant violation
 - `[arm_va2pte.c:DEBUGASSERT]` Enforces runtime precondition and state assertions via `DEBUGASSERT`

@@ -1,7 +1,7 @@
 # hardware (`nuttx/arch/arm/src/stm32h5/hardware`)
 
 ## Overview
-Hardware abstraction and architecture package for `hardware` under `nuttx/arch/arm/src/stm32h5/hardware`, providing 29 header file(s) and 0 source file(s) (including `stm32_adc.h`, `stm32_crc.h`, `stm32_crs.h`, `stm32_dac.h`).
+Hardware abstraction and architecture package for `hardware` under `nuttx/arch/arm/src/stm32h5/hardware`, providing 27 header file(s) and 0 source file(s) (including `stm32_adc.h`, `stm32_crc.h`, `stm32_crs.h`, `stm32_dac.h`).
 
 ## Interface
 - `[stm32_adc.h:STM32_ADC1_OFFSET]`
@@ -38,7 +38,6 @@ Hardware abstraction and architecture package for `hardware` under `nuttx/arch/a
 ## Invariants
 - `[stm32_dmasigmap.h:#error]` Compile-time guard: Unsupported STM32H5 DMA signal map
 - `[stm32_flash.h:#error]` Compile-time guard: Unsupported STM32 H5 flash
-- `[stm32_i2c.h:#error]` Compile-time guard: Unsupported STM32 H5 I2C
 - `[stm32_memorymap.h:#error]` Compile-time guard: Unsupported STM32 H5 memory map
 - `[stm32_pinmap.h:#error]` Compile-time guard: Unsupported STM32 H5 pin map
 - `[stm32_pwr.h:#error]` Compile-time guard: Unsupported STM32 H5 PWR

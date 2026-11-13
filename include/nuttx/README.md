@@ -205,6 +205,7 @@ Core NuttX kernel/OS internal and driver-facing header files defining architectu
 - `[signal.h:nxsig_action]`
 - `[signal.h:nxsig_kill]`
 - `[signal.h:nxsig_notification]`
+- `[signalfd.h:signalfd_notify]`
 - `[spawn.h:add_file_action]`
 - `[spinlock.h:spin_lock_init]`
 - `[spinlock.h:spin_lock_irqsave]`
@@ -217,6 +218,8 @@ Core NuttX kernel/OS internal and driver-facing header files defining architectu
 - `[symtab.h:struct symtab_s]`
 - `[symtab.h:symtab_findbyname]`
 - `[symtab.h:symtab_findbyvalue]`
+- `[tag.h:enum nxtag_e]`
+- `[tag.h:nxtag_get_name]`
 - `[tls.h:struct tls_info_s]`
 - `[tls.h:tls_get_info]`
 - `[trace.h:trace_begin]`

@@ -11,6 +11,7 @@ Provides the upper-half and lower-half UART/serial character driver architecture
 - `uart_16550.h:u16550_s`, `uart_16550.h:u16550_ops_s`, `uart_16550.h:u16550_earlyserialinit`, `uart_16550.h:u16550_serialinit`, `uart_pci_16550.h:pci_u16550_init` - Generic and PCI 16550 UART driver interfaces.
 - `uart_pl011.h:pl011_earlyserialinit`, `uart_pl011.h:pl011_serialinit`, `uart_cmsdk.h:cmsdk_earlyserialinit`, `uart_cmsdk.h:cmsdk_serialinit`, `uart_xlnx_ps.h:xlnxps_earlyserialinit`, `uart_xlnx_ps.h:xlnxps_serialinit` - ARM PL011, Cortex-M CMSDK, and Xilinx Zynq PS UART drivers.
 - `uart_bth4.h:uart_bth4_register`, `uart_bth5.h:uart_bth5_register`, `uart_rpmsg.h:uart_rpmsg_init`, `uart_rpmsg_raw.h:uart_rpmsg_raw_init`, `uart_ram.h:uart_ram_register`, `uart_hostfs.h:uart_hostfs_init` - Virtual UART transports over Bluetooth H4/H5, RPMsg, shared RAM, and HostFS.
+- `netdev_console.h:netdev_console_init` - Network-device remote console driver initializer.
 
 ## Invariants
 - Callers of `serial.h:uart_register` must pre-allocate and initialize `xmit.buffer`, `xmit.size`, `recv.buffer`, `recv.size`, `isconsole`, and `ops` in `serial.h:uart_dev_s`; the upper-half initializes `xmitsem`, `recvsem`, and `closelock`.
